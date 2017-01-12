@@ -7,48 +7,49 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-
-<div class="container">
-	<form method="post" id="empdata" enctype="multipart/form-data">
-	   <table>
-	   		<td>
-	    		<tr>Employee id</tr>
-	    		<tr> <input type="text" id="employeeid" name="empid"></tr>
-	    	</td>
-	    	<td>
-	    		<tr>Date</tr>
-	    		<tr><input type="text" id="date" name="date"></tr><br>
-	    	</td>
-	    	<td>
-	    		<tr>Category</tr>
-	    		<tr>
-	    			<div class="form-group">
-					  <select class="form-control" id="sel1" name="category">
-					    <option>Food</option>
-					    <option>Travel</option>
-					    <option>Accomodation</option>
-					    <option>Fuel</option>
-					    <option>Health</option>
-					    <option>Others</option>
-					  </select>
-					</div>
-				</tr>
-	    	</td>
-	    	<td>
-	    		<tr>Amount</tr>
-	    		<tr><input type="text" id="amount" name="amount"></tr>
-	    	</td>
-	    	<td>
-	    		<tr>Select Image</tr>
-	    		<tr> <input type="file" name="bill" id="image"></tr>
-	    	</td>
-	      
-        </table>
-        <button type="submit">SUBMIT</button>
-  	</form>
-</div>
+	<div class="container">
+		<form method="post" id="empdata" enctype="multipart/form-data">
+		    <div class='table-responsive'>
+		        <table class="table table-hover">
+			    	<tr>
+			    		<td>Employee id</td>
+			    		<td> <input type="text" id="employeeid" name="empid"></td>
+			    	</tr>
+			    	<tr>
+			    		<td>Date</td>
+			    		<td><input type="text" id="date" name="date"></td>
+			    	</tr>
+			    	<tr>
+			    		<td>Category</td>
+			    		<td>
+			    			<div class="form-group">
+							  <select class="form-control" id="sel1" name="category">
+							    <option>Food</option>
+							    <option>Travel</option>
+							    <option>Accomodation</option>
+							    <option>Fuel</option>
+							    <option>Health</option>
+							    <option>Others</option>
+							  </select>
+							</div>
+						</td>
+			    	</tr>
+			    	<tr>
+			    		<td>Amount</td>
+			    		<td><input type="text" id="amount" name="amount"></td>
+			    	</tr>
+			    	<tr>
+			    		<td>Upload Bill</td>
+			    		<td> <input type="file" name="bill" id="image"></td>
+			    	</tr>
+			    </table>
+				<button type="submit">SUBMIT</button>
+			</div>
+	    </form>
+	</div>
 <script type="text/javascript" src="script/employee.js"></script>
 </body>
 </html>
