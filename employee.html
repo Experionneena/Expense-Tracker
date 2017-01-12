@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<form method="post" id="empdata" enctype="multipart/form-data">
+	   <table>
+	   		<td>
+	    		<tr>Employee id</tr>
+	    		<tr> <input type="text" id="employeeid" name="empid"></tr>
+	    	</td>
+	    	<td>
+	    		<tr>Date</tr>
+	    		<tr><input type="text" id="date" name="date"></tr><br>
+	    	</td>
+	    	<td>
+	    		<tr>Category</tr>
+	    		<tr>
+	    			<div class="form-group">
+					  <select class="form-control" id="sel1" name="category">
+					    <option>Food</option>
+					    <option>Travel</option>
+					    <option>Accomodation</option>
+					    <option>Fuel</option>
+					    <option>Health</option>
+					    <option>Others</option>
+					  </select>
+					</div>
+				</tr>
+	    	</td>
+	    	<td>
+	    		<tr>Amount</tr>
+	    		<tr><input type="text" id="amount" name="amount"></tr>
+	    	</td>
+	    	<td>
+	    		<tr>Select Image</tr>
+	    		<tr> <input type="file" name="bill" id="image"></tr>
+	    	</td>
+	      
+        </table>
+        <button type="submit">SUBMIT</button>
+  	</form>
+</div>
+<script type="text/javascript" src="script/employee.js"></script>
+</body>
+</html>
