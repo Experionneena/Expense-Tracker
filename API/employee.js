@@ -1,56 +1,39 @@
-var employeeRouter = express.Router();
-employeeRouter.get('/EMPLOYEE/:id',function (request, response){
+var express = require('express');
+var bodyParser = require('body-parser');
+var mysql = require('mysql');
+var cors = require('cors');
+var fs = require('fs');
+var busboy = require('connect-busboy');
+
+var connection=mysql.createConnection({host:"localhost",user:"root",password:"neena",database:"expense_tracker"});
+var app = express();
+var userRouter = express.Router();
+app.use(cors());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+app.use(busboy());
+
+userRouter.get('/EMPLOYEE/:id',function (request, response){
 	var id1=request.params.id;
 	console.log(id1);
-	connection.query('select * from expense where expense.empid = "'+id1+'" limit 5',function(err,rows){
+	connection.query("select empid,CONCAT(EXTRACT(DAY FROM date),'/',EXTRACT(MONTH FROM date),'/',EXTRACT(YEAR FROM date)) date,category,amount,expense_id from expense where expense.empid = '"+id1+"' order by expense.date desc",function(err,rows){
 			var data=JSON.stringify(rows);
 			var json=JSON.parse(data);
-			console.log(json);
+			//console.log(json);
 			response.send(json);
 	    });
 
 });
 
-employeeRouter.post('/EMPLOYEE',function(request, response){
+userRouter.delete('/EMPLOYEE/:id',function (request, response){
+	var id1=request.params.id;
+	console.log(id1);
+	connection.query('delete from expense where expense.expense_id = "'+id1+'"',function(err,rows){
+			var data=JSON.stringify(rows);
+			var json=JSON.parse(data);
+			//console.log(json);
+			response.send(json);
+	    });
 
-	var fstream;
-	var field={};
-    var js={"status":'403',"message":" failed",};
-    new Promise(function(resolve, reject){
-	    request.pipe(request.busboy);
-		request.busboy.on('file', function (fieldname, file, filename) {
-			console.log("Uploading: " + filename); 
-			field["bill"]=filename;
-		    fstream = fs.createWriteStream(__dirname + '/API/images/' + filename);
-		    file.pipe(fstream);
-		    fstream.on('close', function () {
-		            //response.redirect('back');
-		    });
-		});
-
-		request.busboy.on('field', function(fieldname, val) {
-		    	//console.log(fieldname, val);
-		field[fieldname] = val;
-		    	
-		});
-		resolve();
-	}).then(function(){
-
-		field["date"]=new Date(field["date"]);
-		console.log(field);
-		connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
-              if (!err) {
-				js.status='200';
-                js.message="success";
-                console.log(js);
-                response.send(js);
-            }
-            else
-            	console.log(err);
-        });
-	}).catch(function(){
-		console.log("uploading failed");
-
-		});
-console.log(field);
 });
+module.exports = userRouter;

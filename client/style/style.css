@@ -24,6 +24,7 @@ button{
     width: 100%;
     font-size: 15px;
     background-color: #61BB4F;
+    border-style: none;
 }
 
 input{

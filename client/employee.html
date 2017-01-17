@@ -7,17 +7,24 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="style/employee.css">
-
+  
 </head>
+
 <body>
+	<div class="header">
+		<div class="icon"><img class="image" src="images/expense.png"></div>
+		<div class="text">EXPENSE TRACKER</div>
+		<div class="logout"><button type="button" class="logoutb" onclick="logout()">LOGOUT</button></div>
+	</div>
  
 
 	<div class="container">
-		<form method="post" id="empdata" enctype="multipart/form-data">
-		    <div class='table-responsive'>
-		        <table class="table table-hover">
-			    	<tr>
+		<div class='table'><p class="add">ADD NEW EXPENSE</p>
+			<form method="post" id="empdata" enctype="multipart/form-data">
+		    
+		    
+		        <table class="table addtable">
+			    	<tr class="tr">
 			    		<td>Employee id</td>
 			    		<td>Date</td>
 			    		<td>Category</td>
@@ -43,35 +50,19 @@
 						</td>
 						<td><input type="text" id="amount" name="amount"></td>
 						<td> <input type="file" name="bill" id="image"></td>
-						<td><button type="submit">ADD EXPENSE</button></td>
+						<td><button type="submit" class="buttonp">ADD EXPENSE</button></td>
 			    	</tr>
 			    </table>
-			</div>
-	    </form>
-	
-	  	<div id="list1">
-			 <!--  <h2>List of expense</h2>
-			  <ul class="list-group">
-			    <li class="list-group-item">Category</li><div id="category"></div>
-			    <li class="list-group-item"></li><div id="amount"></div>
-			    <li class="list-group-item">Warnings</li><div id="date"></div>
-			  </ul> -->
-				  	
+			    
+			</form>
+		<div id="list"><p class="view">PREVIOUS EXPENSES</p>
+	  		<div id="list1">
+	  		</div>
+		</div>
+	  	<div id="list2">  	
 	  	</div>
-	  	<div id="list2">
-			 <!--  <h2>List of expense</h2>
-			  <ul class="list-group">
-			    <li class="list-group-item">Category</li><div id="category"></div>
-			    <li class="list-group-item"></li><div id="amount"></div>
-			    <li class="list-group-item">Warnings</li><div id="date"></div>
-			  </ul> -->
-				  	
-	  	</div>
-
-
-	
 	</div>
-
 <script type="text/javascript" src="script/employee.js"></script>
+<link rel="stylesheet" href="style/employee.css">
 </body>
 </html>

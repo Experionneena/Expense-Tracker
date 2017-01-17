@@ -1,0 +1,56 @@
+img{
+	width:70%;
+	/*height:20%!important;*/
+}
+body{
+	background-color: #DADADA;
+}
+.container {
+    width: 100%;
+    float: left;
+}
+.header{
+	background-color: #61BB4F; 
+	float: left;
+	width: 100%;
+}
+.text{
+	color: white;
+	font-size: 45px;
+	font-weight: bold;
+	float: right;
+	width:75%;
+	margin-top: 3%;
+}
+.icon{
+	float: left;
+	width: 20%;
+	margin: 3% 0 3% 0;
+}
+.image{
+	width: 28%;
+    height: 25%;
+	float: left;
+	margin-left: 66%;
+}
+.logout{
+	margin-left: 80%;
+}
+.logoutb{
+	width:30%;
+}
+.add{
+	font-size: 30px;
+	color:#61BB4F;
+	font-weight: bold;
+	margin-top: 2%
+}
+th,td{
+	padding: 8px!important;
+}
+th{
+	background-color:#61BB4F;
+}
+#imagetd{
+	width:30%;
+}

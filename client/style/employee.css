@@ -1,8 +1,82 @@
-img{
-	width:200px;
-	height: 200px;
+body{
+	background-color: #DADADA;
 }
-
+.container {
+    width: 100%;
+}
 #etable{
 	width: 100%;
+}
+.header{
+	background-color: #61BB4F; 
+	float: left;
+	width: 100%;
+}
+.text{
+	color: white;
+	font-size: 45px;
+	font-weight: bold;
+	float: right;
+	width:75%;
+	margin-top: 3%;
+}
+.icon{
+	float: left;
+	width: 20%;
+	margin: 3% 0 3% 0;
+}
+.container{
+	float:left;
+	width: 102%;
+}
+.image{
+	width: 28%;
+    height: 25%;
+	float: left;
+	margin-left: 66%;
+}
+.logout{
+	margin-left: 80%;
+}
+.logoutb{
+	width:30%;
+}
+.addtable{
+	margin-left: 2%;
+}
+#employeeid,#date,#amount{
+	width:75%;
+}
+#sel1{
+	width: 90%;
+}
+.table {
+    width: 96%;
+    margin-bottom: 67px;
+    background-color: #EBEBEB
+}
+.add{
+	margin: 2% 2%;
+	font-size: 25px;
+	color:#61BB4F;
+	font-weight: bold;
+}
+.buttonp{
+	background-color: #61BB4F;
+	color:white;
+	border-style: none;
+}
+.tr{
+	background-color: #4CAF50;
+}
+.view{
+	font-size: 25px;
+	color:#61BB4F;
+	font-weight: bold;
+}
+.list1{
+	margin-top: 2%;
+}
+th,td{
+	padding: 10px;
 }

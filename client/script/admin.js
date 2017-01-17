@@ -1,26 +1,27 @@
-//console.log("hai");
 var httpObj=new	XMLHttpRequest();
-
-
 httpObj.onreadystatechange=function(){
 	if(this.readyState=='4' && this.status=='200')
 	{
 		var result=this.responseText;
 		result=JSON.parse(result);
-		//console.log(typeof result[4].bill);
 		var table = document.getElementById('tablebody');
-		content = "<div class='table-responsive'><table class='table table-hover'><thead><tr><th>No.</th><th>Name</th><th>Employee id</th><th>Date</th><th>Category</th><th>Amount</th><th>Bill</th></tr></thead><tbody>";
+		content = "<div class='table-responsive'><table class='table table-hover'><thead><tr><th>No.</th><th></th><th>Name</th><th></th><th>Employee id</th><th></th><th>Date</th><th></th><th>Category</th><th></th><th>Amount</th><th></th><th>Bill</th></tr></thead><tbody>";
         var i = 1;
         result.forEach(function(element) {
-        var d = new Date(element.date);
-        content += "<tr><td>" + i + "</td><td>" + element.empname + "</td><td>" + element.empid + "</td><td>" + element.date + "</td><td>" + element.category + "</td><td>" + element.amount + "</td><td><img src='../client/images/" +element.bill +"'></td>";
-         // content += "<tr><td>" + i + "</td><td>" + element.empname + "</td><td>" + element.empid + "</td><td>" + element.date + "</td><td>" + element.category + "</td><td>" + element.amount + "</td><td><img src='images/20170103_160801.jpg'></td>";
-        i++;
+            var d = new Date(element.date);
+            content += "<tr><td>" + i + "</td><td></td><td>" + element.empname + "</td><td></td><td>" + element.empid + "</td><td></td><td>" + element.date + "</td><td></td><td>" + element.category + "</td><td></td><td>" + element.amount + "</td><td></td><td id='imagetd'><img src='http://localhost:8082/" +element.bill +"' alt='No biils are available'></td></tr>";
+            i++;
         });
         content += "</tbody> </table> </div>";
-        document.getElementById('container').innerHTML = content;
+        document.getElementById('list').innerHTML = content;
     }
 }
-httpObj.open('GET','http://127.0.0.1:8088/ADMIN',true);
+httpObj.open('GET','http://127.0.0.1:8082/ADMIN',true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
+
+function logout(){
+     window.location.reload();
+     window.location = 'index.html';
+    
+}
