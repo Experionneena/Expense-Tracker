@@ -1,4 +1,5 @@
-
+// sessionStorage.setItem('key', 'hfcx');
+// 				console.log(key);
 function validateForm() {
     var id = document.forms["validation"]["userid"].value;
      var password = document.forms["validation"]["password"].value;
@@ -37,13 +38,14 @@ function validateUser(){
 				else if(result.user_type=='user'){
 					window.location='employee.html';
 				}
+				
 			}
 			else{
 				 alert(result.message);
 			}
 		}
 	}
-	httpObj.open('POST','http://127.0.0.1:8082/login',true);
+	httpObj.open('POST','http://192.168.1.225:8082/login',true);
 	httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 	httpObj.send('userId='+document.getElementById('userid').value+'&password='+password);
 }

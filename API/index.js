@@ -6,7 +6,7 @@ var mysql = require('mysql');
 var cors = require('cors');
 var busboy = require('connect-busboy');
 var fs = require('fs');
-
+path = require('path');
 var admin = require('./admin');
 var employee = require('./employee');
 var app = express();
@@ -19,6 +19,12 @@ app.use(busboy());
 
 var connection=mysql.createConnection({host:"localhost",user:"root",password:"neena",database:"expense_tracker"});
 var loginRouter = express.Router();
+
+app.get('/', (request, response) => {
+    response.sendFile(path.join(__dirname, '..', 'client/index.html'));
+});
+console.log(path.join(__dirname, '..', 'client'));
+app.use(express.static(path.join(__dirname, '..', 'client')));
 
 loginRouter.post('/login',function(request, response){
 	var id=request.body.userId;
@@ -52,7 +58,7 @@ loginRouter.post('/login',function(request, response){
     });
 });
 
-loginRouter.post('/EMPLOYEE',function(request, response) {
+loginRouter.post('/EXPENSE',function(request, response) {
 	var fstream;
 	var field={};
     var js={"status":'403',"message":" failed",};
@@ -74,6 +80,13 @@ loginRouter.post('/EMPLOYEE',function(request, response) {
 		});
 		resolve();
 	}).then(function(){
+		// if(field["date"]==""){
+		// 	js.message="date mising at server";
+		// }
+		// if(field["amount"]==""){
+		// 	js.message="amount mising at server";
+		// }
+		
 		field["date"]=new Date(field["date"]);
 		console.log(field);
 		connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {

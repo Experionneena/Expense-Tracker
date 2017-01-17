@@ -1,3 +1,5 @@
+// var value = sessionStorage.getItem(key);
+//                 console.log(value);
 var id = 503;
 var httpObj=new XMLHttpRequest();
 httpObj.onreadystatechange=function(){
@@ -19,7 +21,7 @@ httpObj.onreadystatechange=function(){
         document.getElementById('list1').innerHTML = content;
     }
 }
-httpObj.open('GET','http://127.0.0.1:8082/EMPLOYEE/'+id,true);
+httpObj.open('GET','http://192.168.1.225:8082/EMPLOYEE/'+id,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
 
@@ -46,7 +48,7 @@ $("form#empdata").submit(function(){
     formValidation();
     window.location.reload();
     $.ajax({
-        url: 'http://127.0.0.1:8082/EMPLOYEE',
+        url: 'http://192.168.1.225:8082/EXPENSE',
         type: 'POST',
         data: formData,
         async: false,
@@ -74,7 +76,7 @@ function deleteExpense(expid){
     }
 //var exid = document.getElementById('expenseid').value;
 console.log(expid);
-httpObj.open('DELETE','http://127.0.0.1:8082/EMPLOYEE/'+expid,true);
+httpObj.open('DELETE','http://192.168.1.225:8082/EXPENSE/'+expid,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
 }
