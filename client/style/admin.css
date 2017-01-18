@@ -1,9 +1,13 @@
 img{
-	width:70%;
+	width:60%;
 	/*height:20%!important;*/
 }
 body{
 	background-color: #DADADA;
+}
+.table{
+	background-color: #ffff;
+	margin-top: 1%;
 }
 .container {
     width: 100%;
@@ -13,6 +17,7 @@ body{
 	background-color: #61BB4F; 
 	float: left;
 	width: 100%;
+	margin-bottom: 1%;
 }
 .text{
 	color: white;
@@ -28,8 +33,8 @@ body{
 	margin: 3% 0 3% 0;
 }
 .image{
-	width: 28%;
-    height: 25%;
+	width: 30%;
+    height: 20%;
 	float: left;
 	margin-left: 66%;
 }
@@ -38,6 +43,7 @@ body{
 }
 .logoutb{
 	width:30%;
+	margin-bottom: 2%;
 }
 .add{
 	font-size: 30px;
@@ -53,4 +59,27 @@ th{
 }
 #imagetd{
 	width:30%;
+}
+#sel1{
+	width: 50%;
+}
+#total{
+	width:96%;
+    margin-left: 2%;
+}
+#welcome{
+	width: 25%;
+	float: right;
+	margin-left: 45%;
+	margin-top: -4%;
+	margin-bottom: 1%;
+	color:white;
+	font-weight: bold;
+	font-size: 16px;
+}
+.buttonp{
+	background-color: #61BB4F;
+	color:white;
+	border-style: none;
+	margin-top: 1%;
 }

@@ -1,17 +1,13 @@
-// var value = sessionStorage.getItem(key);
-//                 console.log(value);
 var tokenc = localStorage.getItem('token1');
 var role = localStorage.getItem('role');
 var name = localStorage.getItem('name');
+var id = localStorage.getItem('id');
 if(tokenc==null && role==null){
     window.location = "index.html";
 }     
-console.log(localStorage.getItem('key'));
-console.log(localStorage.getItem('id'));
-var id = localStorage.getItem('id');
+var key ={'token':tokenc,'role':role};
+key=JSON.stringify(key);
 document.getElementById('employeeid').value = id;
-
-
 var httpObj=new XMLHttpRequest();
 httpObj.onreadystatechange=function(){
     if(this.readyState=='4' && this.status=='200')
@@ -38,10 +34,9 @@ httpObj.onreadystatechange=function(){
         document.getElementById('welcome').appendChild(t);
     }
 }
-var key ={'token':tokenc,'role':role};
-key=JSON.stringify(key);
 
-httpObj.open('GET','http://192.168.1.225:8082/EMPLOYEE/'+id'/'+key,true);
+
+httpObj.open('GET','http://192.168.1.225:8082/EMPLOYEE/'+id+'/'+key,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
 
@@ -68,7 +63,7 @@ $("form#empdata").submit(function(){
     formValidation();
     window.location.reload();
     $.ajax({
-        url: 'http://192.168.1.225:8082/EXPENSE',
+        url: 'http://192.168.1.225:8082/EXPENSE/'+key,
         type: 'POST',
         data: formData,
         async: false,
@@ -78,10 +73,7 @@ $("form#empdata").submit(function(){
         contentType: false,
         processData: false
     });
-
-
     return false;
-
 });
 
 function deleteExpense(expid){
@@ -94,9 +86,7 @@ function deleteExpense(expid){
             window.location.reload();
         }
     }
-//var exid = document.getElementById('expenseid').value;
-console.log(expid);
-httpObj.open('DELETE','http://192.168.1.225:8082/EXPENSE/'+expid,true);
+httpObj.open('DELETE','http://192.168.1.225:8082/EXPENSE/'+expid+'/'+key,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
 }

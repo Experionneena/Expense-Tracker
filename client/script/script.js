@@ -47,6 +47,7 @@ function validateUser(){
 				
 				  localStorage.setItem('role',result.user_type);
 				  localStorage.setItem('name',result.empname);
+				  // localStorage.setItem('id',result.empid);
 				   var role = localStorage.getItem('role');
 				   var name = localStorage.getItem('name');
 				 console.log(name);				

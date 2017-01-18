@@ -24,7 +24,6 @@ var loginRouter = express.Router();
 app.get('/', (request, response) => {
     response.sendFile(path.join(__dirname, '..', 'client/index.html'));
 });
-console.log(path.join(__dirname, '..', 'client'));
 app.use(express.static(path.join(__dirname, '..', 'client')));
 
 loginRouter.post('/login',function(request, response){
@@ -43,7 +42,7 @@ loginRouter.post('/login',function(request, response){
 	connection.query('select empid,password,status,empname from user where empid ="'+id+'"',function(err,rows){
 		var data=JSON.stringify(rows);
 		var json=JSON.parse(data);
- 		var js={"status":'403',"message":"Login failed","user_type":null,"token":"","empname":""};
+ 		var js={"status":'403',"message":"Login failed","user_type":null,"token":"","empname":"","empid":""};
  		if(rows.length > 0){
 			if(id==json[0].empid && password==json[0].password){
 				js.status='200';
@@ -55,6 +54,7 @@ loginRouter.post('/login',function(request, response){
 				else js.user_type="user";
 				var token = jwt.sign({role:js.user_type}, 'neena',{expiresIn:60*10000});
 				js.empname=json[0].empname;
+				js.empid=json[0].empid;
 				js.token=token;
 				console.log(js.empname);
 			}
@@ -63,7 +63,7 @@ loginRouter.post('/login',function(request, response){
     });
 });
 
-loginRouter.post('/EXPENSE',function(request, response) {
+loginRouter.post('/EXPENSE/:key',function(request, response) {
 	var fstream;
 	var field={};
     var js={"status":'403',"message":" failed",};
@@ -73,6 +73,10 @@ loginRouter.post('/EXPENSE',function(request, response) {
 			console.log("Uploading: " + filename); 
 			field["bill"]=filename;
 			if (field["bill"]=="") { return false;}
+			var timestamp=new Date().getTime();
+			field["bill"]=timestamp+field["bill"];
+			console.log(field["bill"]);
+			filename=timestamp+filename;
 		   fstream = fs.createWriteStream(__dirname + '/images/' + filename);
 		    file.pipe(fstream);
 		    fstream.on('close', function () {
@@ -85,19 +89,12 @@ loginRouter.post('/EXPENSE',function(request, response) {
 		});
 		resolve();
 	}).then(function(){
-		// if(field["date"]==""){
-		// 	js.message="date mising at server";
-		// }
-		// if(field["amount"]==""){
-		// 	js.message="amount mising at server";
-		// }
-		
 		field["date"]=new Date(field["date"]);
-		var timestamp=new Date().getTime();
-		console.log(timestamp);
-		//console.log(field);
-		field["bill"]=timestamp+field["bill"];
-		console.log(field["bill"]);
+		// var timestamp=new Date().getTime();
+		// console.log(timestamp);
+		// //console.log(field);
+		// field["bill"]=timestamp+field["bill"];
+		// console.log(field["bill"]);
 		connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
               if (!err) {
 				js.status='200';
@@ -113,37 +110,10 @@ loginRouter.post('/EXPENSE',function(request, response) {
 
 		});
 });
-loginRouter.post('/verify',function(request, response){
-	var id=request.body.id;
-	var id1=request.body.role;
-	var js={"message":"invalid user",};
-	console.log(id1);
-	if(id == ""){
-		js.message = "invalid user";
-	}
-	else{
-		var decoded = jwt.verify(id, 'neena');
-		console.log(decoded);
-		if(decoded.role == id1){
-		js.message = "valid user";
-		}
-		else{
-			js.message = "invalid user";
-		}
-
-	}
-	
-		response.send(js);
-	
-
-});
-
 
 app.use('/',loginRouter);
 app.use('/',employee);
 app.use('/',admin);
-
-
 
 var server = app.listen(8082,function(){
 	var port = server.address().port;

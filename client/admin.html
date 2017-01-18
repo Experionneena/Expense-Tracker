@@ -14,8 +14,51 @@
 		<div class="header">
 			<div class="icon"><img class="image" src="images/expense.png"></div>
 			<div class="text">EXPENSE TRACKER</div>
+			<div id="welcome">WELCOME ADMIN</div>
 			<div class="logout"><button type="button" class="logoutb" onclick="logout()">LOGOUT</button></div>
 		</div>
+		<form method="post" id="total">
+		    <table class="table addtable">
+			    	<tr class="tr">
+			    		<td>Employee id</td>
+			    		<td></td>
+			    		<td></td>
+			    		<td>     </td>
+			    		<td>     </td>
+			    		<!-- <td>Date</td>
+			    		<td>Category</td>
+			    		<td>Amount</td>
+			    		<td>Upload Bill</td> -->
+			    		<!-- <td></td>
+			    		<td></td> -->
+
+			    	</tr>
+			    	<tr>
+			    		<td><select class="form-control" id="sel1" name="employeeid"></select></td>
+			    		<td><button type="button" onclick="getTotal()" class="buttonp">VIEW TOTAL EXPENSE</button></td> 
+			    		<td id="name"></td>
+			    		<td id="sum"></td>
+			    		<td></td>
+			    		<td></td>
+			    		<!-- <td>
+			    			<div class="form-group">
+							  <select class="form-control" id="sel1" name="category">
+							    <option>Food</option>
+							    <option>Travel</option>
+							    <option>Accomodation</option>
+							    <option>Fuel</option>
+							    <option>Health</option>
+							    <option>Others</option>
+							  </select>
+							</div>
+						</td>
+						<td><input type="text" id="amount" name="amount"></td>
+						<td> <input type="file" name="bill" id="image"></td>-->
+						
+			    	</tr>
+			    </table>
+			    
+			</form>
 		<div class="container"><p class="add">EXPENSES</p>
 			<div id="list">
 			</div>
