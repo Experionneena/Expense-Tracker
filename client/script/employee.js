@@ -1,13 +1,24 @@
 // var value = sessionStorage.getItem(key);
 //                 console.log(value);
-var id = 503;
+var tokenc = localStorage.getItem('token1');
+var role = localStorage.getItem('role');
+var name = localStorage.getItem('name');
+if(tokenc==null && role==null){
+    window.location = "index.html";
+}     
+console.log(localStorage.getItem('key'));
+console.log(localStorage.getItem('id'));
+var id = localStorage.getItem('id');
+document.getElementById('employeeid').value = id;
+
+
 var httpObj=new XMLHttpRequest();
 httpObj.onreadystatechange=function(){
     if(this.readyState=='4' && this.status=='200')
     {
         var result=this.responseText;
         result=JSON.parse(result);
-        //console.log(result);
+        console.log(result);
         var table = document.getElementById('list1');
         content = "<div class='table'><table class='table2' id='etable'><thead><tr class='tr'><th>No.</th><th>Category</th><th>Date</th><th>Amount</th><th></th></tr></thead><tbody>";
         var i = 1;
@@ -19,9 +30,18 @@ httpObj.onreadystatechange=function(){
         });
         content += "</tbody><tfooter></tfooter></table> </div>";
         document.getElementById('list1').innerHTML = content;
+        var name = localStorage.getItem('name');
+        name = name.toUpperCase(); 
+        var welcome="WELCOME"+"  "+name
+        console.log(welcome);
+        var t = document.createTextNode(welcome);
+        document.getElementById('welcome').appendChild(t);
     }
 }
-httpObj.open('GET','http://192.168.1.225:8082/EMPLOYEE/'+id,true);
+var key ={'token':tokenc,'role':role};
+key=JSON.stringify(key);
+
+httpObj.open('GET','http://192.168.1.225:8082/EMPLOYEE/'+id'/'+key,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
 
@@ -92,11 +112,12 @@ $(document).ready(function(){
       };
       date_input.datepicker(options);
 });
-function logout(){
-    window.location.reload();
-    window.location.assign("index.html")
-    
-}
 
+function logout(){
+    localStorage.setItem('token1',null);
+    localStorage.setItem('role',null);
+    window.location.reload();
+    window.location = 'index.html';
+}
 
 

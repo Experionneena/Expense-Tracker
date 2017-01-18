@@ -16,7 +16,8 @@ app.use(busboy());
 
 userRouter.get('/EMPLOYEE/:id',function (request, response){
 	var id1=request.params.id;
-	console.log(id1);
+	//var id2=request.body.tokenc;
+	//console.log(id2);
 	connection.query("select empid,CONCAT(EXTRACT(DAY FROM date),'/',EXTRACT(MONTH FROM date),'/',EXTRACT(YEAR FROM date)) date,category,amount,expense_id from expense where expense.empid = '"+id1+"' order by expense.date desc",function(err,rows){
 			var data=JSON.stringify(rows);
 			var json=JSON.parse(data);

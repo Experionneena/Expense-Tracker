@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var cors = require('cors');
+var jwt = require('jsonwebtoken');
 var busboy = require('connect-busboy');
 var fs = require('fs');
 path = require('path');
@@ -39,10 +40,10 @@ loginRouter.post('/login',function(request, response){
     if ((validator.isEmpty(password))){
     	js.message="password missing in server side";  
     }   
-	connection.query('select empid,password,status from user where empid ="'+id+'"',function(err,rows){
+	connection.query('select empid,password,status,empname from user where empid ="'+id+'"',function(err,rows){
 		var data=JSON.stringify(rows);
 		var json=JSON.parse(data);
- 		var js={"status":'403',"message":"Login failed","user_type":null};
+ 		var js={"status":'403',"message":"Login failed","user_type":null,"token":"","empname":""};
  		if(rows.length > 0){
 			if(id==json[0].empid && password==json[0].password){
 				js.status='200';
@@ -52,6 +53,10 @@ loginRouter.post('/login',function(request, response){
 				    js.user_type="admin";
 				}
 				else js.user_type="user";
+				var token = jwt.sign({role:js.user_type}, 'neena',{expiresIn:60*10000});
+				js.empname=json[0].empname;
+				js.token=token;
+				console.log(js.empname);
 			}
 		}
 		response.send(js);
@@ -88,7 +93,11 @@ loginRouter.post('/EXPENSE',function(request, response) {
 		// }
 		
 		field["date"]=new Date(field["date"]);
-		console.log(field);
+		var timestamp=new Date().getTime();
+		console.log(timestamp);
+		//console.log(field);
+		field["bill"]=timestamp+field["bill"];
+		console.log(field["bill"]);
 		connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
               if (!err) {
 				js.status='200';
@@ -104,6 +113,31 @@ loginRouter.post('/EXPENSE',function(request, response) {
 
 		});
 });
+loginRouter.post('/verify',function(request, response){
+	var id=request.body.id;
+	var id1=request.body.role;
+	var js={"message":"invalid user",};
+	console.log(id1);
+	if(id == ""){
+		js.message = "invalid user";
+	}
+	else{
+		var decoded = jwt.verify(id, 'neena');
+		console.log(decoded);
+		if(decoded.role == id1){
+		js.message = "valid user";
+		}
+		else{
+			js.message = "invalid user";
+		}
+
+	}
+	
+		response.send(js);
+	
+
+});
+
 
 app.use('/',loginRouter);
 app.use('/',employee);

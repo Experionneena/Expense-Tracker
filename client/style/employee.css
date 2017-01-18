@@ -80,3 +80,13 @@ body{
 th,td{
 	padding: 10px;
 }
+#welcome{
+	width: 25%;
+	float: right;
+	margin-left: 45%;
+	margin-top: -4%;
+	margin-bottom: 1%;
+	color:white;
+	font-weight: bold;
+	font-size: 16px;
+}
