@@ -8,6 +8,7 @@ if(tokenc==null || role==null){
   var total=0; 
   total=parseInt(total);
   console.log(total); 
+
 var httpObj=new	XMLHttpRequest();
 httpObj.onreadystatechange=function(){
 	if(this.readyState=='4' && this.status=='200')
@@ -16,7 +17,7 @@ httpObj.onreadystatechange=function(){
 		result=JSON.parse(result);
         var empidarr=[];
 		var table = document.getElementById('tablebody');
-		content = "<div class='table-responsive'><table class='table table-hover'><thead><tr><th>No.</th><th></th><th>Name</th><th></th><th>Employee id</th><th></th><th>Date</th><th></th><th>Category</th><th></th><th>Amount</th><th></th><th>Bill</th></tr></thead><tbody>";
+		content = "<div class='table-responsive'><table class='table table-hover' id='table'><thead><tr><th>No.</th><th></th><th>Name</th><th></th><th>Employee id</th><th></th><th>Date</th><th></th><th>Category</th><th></th><th>Amount</th><th></th><th>Bill</th></tr></thead><tbody>";
         var i = 1;
         result.forEach(function(element) {
             var d = new Date(element.date);
@@ -52,6 +53,7 @@ function getTotal(){
     var select= document.getElementById('sel1');
     var empid=select.options[select.selectedIndex].value;
     console.log("empid"+empid);
+    var obj={};
     var httpObj = new XMLHttpRequest();
     httpObj.onreadystatechange=function(){
     if(this.readyState == '4' && this.status == '200')
@@ -81,6 +83,26 @@ function logout(){
     window.location = 'index.html';
     
 }
+
+function addEmployee(){
+    var id = document.getElementById('id').value;
+    var name = document.getElementById('name1').value;
+    var email = document.getElementById('mailid').value;
+    console.log(id,name,email);
+    httpObj.onreadystatechange=function(){
+    if(this.readyState == '4' && this.status == '200')
+    {
+        var result=this.responseText;
+        result=JSON.parse(result);
+       
+       
+    }
+}
+httpObj.open('POST','http://192.168.1.225:8082/EMPLOYEE/'+key,true);
+httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
+httpObj.send('id='+id+'&name='+name+'&password='+generatePassword()+'&email='+email);
+
+}
 Array.prototype.contains = function(v) {
     for(var i = 0; i < this.length; i++) {
         if(this[i] === v) return true;
@@ -96,10 +118,29 @@ Array.prototype.unique = function() {
     }
     return arr; 
 };
+
+function generatePassword() {
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return (Crypto.MD5(retVal)).toString();
+}
  // tr:nth-of-type(10n){
  //    page-break-after: always;
  //    $("table > tbody > tr").hide().slice(0, 2).show();
  //    $(".show-all").on("click", function() {
  //        $("tbody > tr", $(this).prev()).show();
- //    });
-$("table > tbody > tr").hide().slice(0, 2).show();
+//  //    });
+// $("table > tbody > tr").hide().slice(0, 2).show();
+$(function () {
+    $('span').click(function () {
+        console.log("haiii");
+        $('#table tr:hidden').slice(0, 5).show();
+        if ($('#table tr').length == $('#table tr:visible').length) {
+            $('span ').hide();
+        }
+    });
+});

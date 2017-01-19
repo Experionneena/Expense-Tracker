@@ -28,7 +28,7 @@ httpObj.onreadystatechange=function(){
         document.getElementById('list1').innerHTML = content;
         var name = localStorage.getItem('name');
         name = name.toUpperCase(); 
-        var welcome="WELCOME"+"  "+name
+        var welcome="WELCOME"+"  "+name;
         console.log(welcome);
         var t = document.createTextNode(welcome);
         document.getElementById('welcome').appendChild(t);
@@ -36,7 +36,7 @@ httpObj.onreadystatechange=function(){
 }
 
 
-httpObj.open('GET','http://192.168.1.225:8082/EMPLOYEE/'+id+'/'+key,true);
+httpObj.open('GET','http://192.168.1.225:8082/EXPENSE/'+id+'/'+key,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
 

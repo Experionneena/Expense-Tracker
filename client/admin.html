@@ -17,20 +17,37 @@
 			<div id="welcome">WELCOME ADMIN</div>
 			<div class="logout"><button type="button" class="logoutb" onclick="logout()">LOGOUT</button></div>
 		</div>
-		<form method="post" id="total">
+		
+			<div class="view"><p class="add">ADD NEW EMPLOYEE</p>
+
+				<form method="post" id="total">
+			    <table class="table addtable">
+				    	<tr class="tr">
+				    		<td>Employee Id</td>
+				    		<td>Employee Name</td>
+				    		<td>Email Id</td>
+				   		</tr>
+				    	<tr>
+				    		<td><input type="text" id="id"></td>
+				    		<td><input type="text" id="name1"></td> 
+				    		<td><input type="text" id="mailid"></td>
+				    		<td><button type="button" onclick="addEmployee()" class="buttonp">ADD EMPLOYEE</button></td>  
+				    		
+				    	</tr>
+				    </table>
+				    
+				</form>
+				
+			</div> 
+			<div class="view"><p class="add">VIEW INDIVIDUAL EXPENSE</p> 
+			<form method="post" id="total">
 		    <table class="table addtable">
 			    	<tr class="tr">
 			    		<td>Employee id</td>
 			    		<td></td>
 			    		<td></td>
-			    		<td>     </td>
-			    		<td>     </td>
-			    		<!-- <td>Date</td>
-			    		<td>Category</td>
-			    		<td>Amount</td>
-			    		<td>Upload Bill</td> -->
-			    		<!-- <td></td>
-			    		<td></td> -->
+			    		<td></td>
+			    		<td></td>
 
 			    	</tr>
 			    	<tr>
@@ -46,30 +63,19 @@
 			    		<td id="sum"></td>
 			    		<td></td>
 			    		<td></td>
-			    		<!-- <td>
-			    			<div class="form-group">
-							  <select class="form-control" id="sel1" name="category">
-							    <option>Food</option>
-							    <option>Travel</option>
-							    <option>Accomodation</option>
-							    <option>Fuel</option>
-							    <option>Health</option>
-							    <option>Others</option>
-							  </select>
-							</div>
-						</td>
-						<td><input type="text" id="amount" name="amount"></td>
-						<td> <input type="file" name="bill" id="image"></td>-->
-						
 			    	</tr>
+
+			    	
 			    </table>
-			    
-			</form>
+			 </form>
+
 		<div class="container"><p class="add">EXPENSES</p>
 			<div id="list">
 			</div>
+			<span>VIEW MORE</span>
 		</div>
 	</div>
 <script type="text/javascript" src="script/admin.js"></script>
+<script type="text/javascript" src="script/2.5.3-crypto-md5.js"></script>
 </body>
 </html>

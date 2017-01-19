@@ -1,5 +1,4 @@
 localStorage.setItem('key', 'hfcx');
- 				//console.log(localStorage.getItem('key'));
 function validateForm() {
     var id = document.forms["validation"]["userid"].value;
      var password = document.forms["validation"]["password"].value;
@@ -41,19 +40,16 @@ function validateUser(){
 				else if(result.user_type=='user'){
 					window.location='employee.html';
 				}
-				 console.log(result.token);				
-			
-				 localStorage.setItem('token1',result.token);
-				
-				  localStorage.setItem('role',result.user_type);
-				  localStorage.setItem('name',result.empname);
-				  // localStorage.setItem('id',result.empid);
-				   var role = localStorage.getItem('role');
-				   var name = localStorage.getItem('name');
-				 console.log(name);				
+				console.log(result.token);				
+				localStorage.setItem('token1',result.token);
+				localStorage.setItem('role',result.user_type);
+				localStorage.setItem('name',result.empname);
+				var role = localStorage.getItem('role');
+				var name = localStorage.getItem('name');
+				console.log(name);				
 			}
 			else{
-				 alert(result.message);
+				alert(result.message);
 			}
 		}
 	}

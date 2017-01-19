@@ -2,23 +2,29 @@ img{
 	width:60%;
 	/*height:20%!important;*/
 }
+
 body{
 	background-color: #DADADA;
+	margin-top: -25px;
 }
+
 .table{
 	background-color: #ffff;
 	margin-top: 1%;
 }
+
 .container {
     width: 100%;
     float: left;
 }
+
 .header{
 	background-color: #61BB4F; 
 	float: left;
 	width: 100%;
 	margin-bottom: 1%;
 }
+
 .text{
 	color: white;
 	font-size: 45px;
@@ -27,6 +33,7 @@ body{
 	width:75%;
 	margin-top: 3%;
 }
+
 .icon{
 	float: left;
 	width: 20%;
@@ -38,35 +45,44 @@ body{
 	float: left;
 	margin-left: 66%;
 }
+
 .logout{
 	margin-left: 80%;
 }
+
 .logoutb{
 	width:30%;
 	margin-bottom: 2%;
 }
+
 .add{
 	font-size: 30px;
 	color:#61BB4F;
 	font-weight: bold;
 	margin-top: 2%
 }
+
 th,td{
 	padding: 8px!important;
 }
+
 th{
 	background-color:#61BB4F;
 }
+
 #imagetd{
 	width:30%;
 }
+
 #sel1{
 	width: 50%;
 }
+
 #total{
 	width:96%;
     margin-left: 2%;
 }
+
 #welcome{
 	width: 25%;
 	float: right;
@@ -77,9 +93,71 @@ th{
 	font-weight: bold;
 	font-size: 16px;
 }
+
 .buttonp{
 	background-color: #61BB4F;
 	color:white;
 	border-style: none;
 	margin-top: 1%;
+}
+table tr:nth-child(n+6) {
+    display:none;
+}
+
+span {
+   cursor: pointer;
+	color: #61BB4F;
+	font-size: 20px;
+	float: right;
+	margin-bottom: 2%;
+	font-weight: bold;
+}
+.add {
+    font-size: 20px;
+    color: #61BB4F;
+    font-weight: bold;
+    margin-top: 2%;
+    margin-left: 20px;
+}
+@media only screen and (max-device-width: 414px) {
+	body{
+		width: 100%;
+	}
+#welcome{
+	width: 100%;
+	float:left;
+	margin-top: 2%;
+	/*margin-left: 30%;*/
+}
+.logoutb{
+	width:90%;
+	margin-bottom: 2%;
+}
+.image{
+	width: 50%;
+    height: 50%;
+	float: left;
+	/*margin-left: 66%;*/
+}
+.icon{
+	float: left;
+
+	
+	width: 50%;
+	margin: 0;
+
+}
+.logout{
+	margin-left: 80%;
+	margin-top: 20%;
+	margin-bottom: 1%;
+}
+.text{
+	  width: 98%;
+	  font-size: 40px;
+	}
+#sel1{
+		width: 100%;
+	}
+	
 }

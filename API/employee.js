@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(busboy());
 
-userRouter.get('/EMPLOYEE/:id/:key',function (request, response){
+userRouter.get('/EXPENSE/:id/:key',function (request, response){
 	var id = request.params.id;
 	var key = {};
 	key = JSON.parse(request.params.key);
@@ -28,7 +28,6 @@ userRouter.get('/EMPLOYEE/:id/:key',function (request, response){
 			connection.query("select empid,CONCAT(EXTRACT(DAY FROM date),'/',EXTRACT(MONTH FROM date),'/',EXTRACT(YEAR FROM date)) date,category,amount,expense_id from expense where expense.empid = '"+id+"' order by expense.date desc",function(err,rows){
 				var data=JSON.stringify(rows);
 				var json=JSON.parse(data);
-				//console.log(json);
 				response.send(json);
 	   		});
 		}
@@ -40,7 +39,6 @@ userRouter.delete('/EXPENSE/:id/:key',function (request, response){
 	var id2={};
 		id2=request.params.key;
 		id2=JSON.parse(id2);
-		//var id3 = request.body.role;
 		console.log(id2.token,id2.role);
 		if(id2.token == ""){
 			console.log("invalid user");
@@ -53,7 +51,6 @@ userRouter.delete('/EXPENSE/:id/:key',function (request, response){
 				connection.query('delete from expense where expense.expense_id = "'+id1+'"',function(err,rows){
 					var data=JSON.stringify(rows);
 					var json=JSON.parse(data);
-					//console.log(json);
 					response.send(json);
 	   			 });
 			}}

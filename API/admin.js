@@ -69,5 +69,38 @@ adminRouter.get('/TOTAL/:id/:key',function(request, response){
 			}
 		}
 });
+adminRouter.post('/EMPLOYEE/:key',function(request, response){
+		var id2={};
+		id2=request.params.key;
+		var id=request.body.id;
+		var name=request.body.name;
+		var password=request.body.password;
+		var email=request.body.email;
+		var status=false;
+		console.log(id,password,email);
+		id2=JSON.parse(id2);
+		console.log(id2.token,id2.role);
+		if(id2.token == ""){
+			console.log("valid user");
+		}
+		else{
+			var decoded = jwt.verify(id2.token, 'neena');
+			console.log(decoded);
+			if(decoded.role == id2.role){
+				console.log("valid user");
+				var post1 = {empid:id,empname:name,password:password,email:email,status:status};
+         //var abc='INSERT INTO request SET '+post1
+				connection.query('insert into user set ?',[post1],function(err,rows){
+					var data=JSON.stringify(rows);
+					var json=JSON.parse(data);
+					console.log(json);
+					response.send(json);
+			    });	
+			}
+			else{
+				console.log("invalid user");
+			}
+		}
+});
 
 module.exports = adminRouter;
