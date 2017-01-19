@@ -2,7 +2,7 @@ var tokenc = localStorage.getItem('token1');
 var role = localStorage.getItem('role');
 var name = localStorage.getItem('name');
 var id = localStorage.getItem('id');
-if(tokenc==null && role==null){
+if(tokenc==null || role==null){
     window.location = "index.html";
 }     
 var key ={'token':tokenc,'role':role};

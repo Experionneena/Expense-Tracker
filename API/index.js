@@ -90,11 +90,6 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 		resolve();
 	}).then(function(){
 		field["date"]=new Date(field["date"]);
-		// var timestamp=new Date().getTime();
-		// console.log(timestamp);
-		// //console.log(field);
-		// field["bill"]=timestamp+field["bill"];
-		// console.log(field["bill"]);
 		connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
               if (!err) {
 				js.status='200';
