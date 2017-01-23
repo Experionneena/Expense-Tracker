@@ -1,17 +1,16 @@
-localStorage.setItem('key', 'hfcx');
 function validateForm() {
     var id = document.forms["validation"]["userid"].value;
      var password = document.forms["validation"]["password"].value;
      if (id == "" && password=="") {
-        alert("Please enter user id and password");
+        bootbox.alert("Please enter user id and password");
 		return false;
     }
     else if(id == ""){
-        alert("Please enter user id");
+        bootbox.alert("Please enter user id");
         return false;
     }
     else if(password == ""){
-        alert("Please enter password");
+        bootbox.alert("Please enter password");
         return false;
     }
      else{
@@ -49,7 +48,13 @@ function validateUser(){
 				console.log(name);				
 			}
 			else{
-				alert(result.message);
+				//alert(result.message);
+				bootbox.alert({ 
+		            size: "small",
+		            title: "Alert",
+		            message: result.message, 
+		            callback: function(){ /* your callback code */ }
+		        })
 			}
 		}
 	}

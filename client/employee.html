@@ -7,7 +7,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+  <script type="text/javascript" src="script/bootbox.min.js"></script>
 </head>
 
 <body>
@@ -16,15 +16,20 @@
 		<div class="text">EXPENSE TRACKER</div>
 		<div id="welcome"></div>
 		<div class="logout"><button type="button" class="logoutb" onclick="logout()">LOGOUT</button></div>
+		<div class="logout"><button type="button" class="logoutb" id="reset">RESET PASSWARD</button></div>
 	</div>
- 
-
-	<div class="container">
-		<div class='table'><p class="add">ADD NEW EXPENSE</p>
+ 	<div class="container">
+		<div class="confirm">
+			<table>
+			    <tr><input type="text" id="current" name="current" placeholder="current password"></tr>
+			    <tr><input type="text" id="new" name="new" placeholder="new password"></tr>
+			    <tr><input type="text" id="confirm" name="confirm" placeholder="confirm password"></tr>
+			    <tr><button type="button" class="buttonp" id="submit"onclick="resetPassword()">SUBMIT</button></tr>
+			</table>
+		</div>
+		<div class='table table-responsive'><p class="add">ADD NEW EXPENSE</p>
 			<form method="post" id="empdata" enctype="multipart/form-data">
-		    
-		    
-		        <table class="table addtable">
+		    	<table class="table addtable">
 			    	<tr class="tr">
 			    		<td>Employee id</td>
 			    		<td>Date</td>
@@ -54,16 +59,17 @@
 						<td><button type="submit" class="buttonp">ADD EXPENSE</button></td>
 			    	</tr>
 			    </table>
-			    
 			</form>
-		<div id="list"><p class="view">PREVIOUS EXPENSES</p>
-	  		<div id="list1">
+			<div id="list"><p class="view">PREVIOUS EXPENSES</p>
+	  			<div id="list1">
+	  			</div>
+			</div>
+	  		<div id="list2">  	
 	  		</div>
 		</div>
-	  	<div id="list2">  	
-	  	</div>
 	</div>
-<script type="text/javascript" src="script/employee.js"></script>
-<link rel="stylesheet" href="style/employee.css">
+	<script type="text/javascript" src="script/employee.js"></script>
+
+	<link rel="stylesheet" href="style/employee.css">
 </body>
 </html>

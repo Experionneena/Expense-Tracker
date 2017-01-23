@@ -1,7 +1,6 @@
 body{
 	background-color: #DADADA;
 }
-
 .formdiv{
 	margin-left: 28%;
     border: 1px solid #D0D0D0;
@@ -10,14 +9,12 @@ body{
     background-color: #F8F8F8;
     margin-top: 2%;
 }
-
 img{
     width: 7%;
     height: 5%;
     margin-top: 5%;
     margin-left: 28%;
 }
-
 button{
     margin-left: 0px;
     padding: 2%;
@@ -26,18 +23,15 @@ button{
     background-color: #61BB4F;
     border-style: none;
 }
-
 input{
 	padding: 5px;
     width: 85%;
 }
-
 .logintext{
     margin-left: 450px;
     margin-top: 100px;
     font-size: 30px;
 }
-
 .text{
     color: #61BB4F;
     font-size: 38px;
@@ -46,13 +40,11 @@ input{
     margin-right: 30%;
     font-weight: bold;
 }
-
 p{
    color: #61BB4F;
    font-size: 20px;
    font-weight: bold;
 }
-
 @media only screen and (max-device-width: 414px) {
 .formdiv{
     width:90%;
@@ -60,16 +52,13 @@ p{
     padding: 15%;
     margin-right: 3%;
 }
-
 .text{
     width:100%;
     font-size: 25px;
     margin-top: 10%;
     float: left;
-    /*margin-right: 30%;*/
     font-weight: bold;
 }
-
 img{
     width: 20%;
     height: 30%;
@@ -77,5 +66,4 @@ img{
     margin-left: 10%;
     float right;
 }
-
 }

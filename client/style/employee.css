@@ -36,9 +36,12 @@ body{
 	margin-left: 66%;
 }
 .logout{
-	margin-left: 80%;
+	margin-left: 70%;
+	width: 40%;
 }
 .logoutb{
+	width: 30%;
+	float: left;
 	width:30%;
 }
 .addtable{
@@ -69,6 +72,17 @@ body{
 .tr{
 	background-color: #4CAF50;
 }
+.confirm{
+	float: left;
+	width: 20%;
+	margin-left: 75%;
+}
+.confirm{
+	display: none;
+}
+#current,#new,#confirm{
+	width:100%;
+}
 .view{
 	font-size: 25px;
 	color:#61BB4F;
@@ -90,20 +104,17 @@ th,td{
 	font-weight: bold;
 	font-size: 16px;
 }
-
-
 @media only screen and (max-device-width: 414px) {
-	body{
-		width: 100%;
-	}
-	table,td,tr,th{
-		width:80%;
-	}
-	#welcome{
+body{
+	width: 100%;
+}
+table,td,tr,th{
+	width:80%;
+}
+#welcome{
 	width: 100%;
 	float:left;
 	margin-top: 2%;
-	/*margin-left: 30%;*/
 }
 .logoutb{
 	width:90%;
@@ -113,15 +124,11 @@ th,td{
 	width: 50%;
     height: 50%;
 	float: left;
-	/*margin-left: 66%;*/
 }
 .icon{
 	float: left;
-
-	
 	width: 50%;
 	margin: 0;
-
 }
 .logout{
 	margin-left: 80%;
@@ -129,7 +136,7 @@ th,td{
 	margin-bottom: 1%;
 }
 .text{
-	  width: 98%;
-	  font-size: 40px;
-	}
-	}
+	width: 98%;
+	font-size: 40px;
+}
+}
