@@ -98,7 +98,7 @@ th{
 #welcome{
 	width: 25%;
 	float: right;
-	margin-left: 45%;
+	/*margin-left: 45%;*/
 	margin-top: -4%;
 	margin-bottom: 1%;
 	color:white;
@@ -110,7 +110,7 @@ th{
 	color:white;
 	border-style: none;
 	margin-top: 1%;
-	margin-left: 2%;
+	margin-left: 7%;
 }
 .dataTables_filter{
 	width:70%!important;
@@ -164,14 +164,19 @@ a:hover {
 	color: #61BB4F;
     background-color: #ffff;
 }
+#viewe
+{
+	display:none;
+}
 @media only screen and (max-device-width: 414px) {
 body{
 	width: 100%;
 }
 #welcome{
-	width: 100%;
-	float:left;
+	width: 36%;
+	float:right;
 	margin-top: 2%;
+	margin-left: 0;
 }
 .logoutb{
 	width:90%;

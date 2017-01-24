@@ -8,10 +8,6 @@ var empidarr = [];
 var total = 0; 
 total=parseInt(total);
 console.log(total); 
-$(document).ready(function() {
-    $('#table').DataTable();
-} );
-
 var httpObj = new	XMLHttpRequest();
 httpObj.onreadystatechange = function(){
 	if(this.readyState == '4' && this.status == '200')
@@ -30,6 +26,7 @@ httpObj.onreadystatechange = function(){
         });
         content += "</tbody> </table> </div>";
         document.getElementById('list').innerHTML = content;
+        $('#table').DataTable();
         console.log(empidarr);
         var li = document.getElementById("sel1");
         var uniques = empidarr.unique()
@@ -86,7 +83,6 @@ httpObj.send();
 }
 
 function logout(){
-    //var r = confirm("Do you want to logout!");
    bootbox.confirm({ 
        size: "small",
        message: "Do you want to logout ?", 
@@ -183,7 +179,11 @@ function addEmployee(){
         result = JSON.parse(result);
         console.log(result);
         if(result.message == "success"){
-            bootbox.alert("Added a new employee successfully");
+            alert("Added a new employee successfully");
+            window.location.reload();
+        }
+        else if(result.message == "failed"){
+            alert("Employee is already added");
             window.location.reload();
         }
     }
@@ -219,6 +219,9 @@ $('#addp').click(function () {
 $('#adde').click(function () {
     $('.addform').toggle();
 });
+$('#totalp').click(function () {
+    $('#viewe').show();
+});
 
 var doc = new jsPDF();
 var specialElementHandlers = {
@@ -228,9 +231,20 @@ var specialElementHandlers = {
 };
 
 $('#cmd').click(function () {
-    doc.fromHTML($('#viewe').html(), 15, 15, {
-        'width': 170,
-            'elementHandlers': specialElementHandlers
+   var doc = new jsPDF();          
+var elementHandler = {
+  '#ignorePDF': function (element, renderer) {
+    return true;
+  }
+};
+var source = window.document.getElementById("viewe");
+doc.fromHTML(
+    source,
+    15,
+    15,
+    {
+      'width': 180,'elementHandlers': elementHandler
     });
-    doc.save('sample-file.pdf');
+
+var o = doc.output("dataurlnewwindow");
 });

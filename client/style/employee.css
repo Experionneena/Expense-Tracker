@@ -1,5 +1,8 @@
 body{
 	background-color: #DADADA;
+	overflow-x:auto;
+	overflow-y:auto;
+	width:100%;
 }
 .container {
     width: 100%;
@@ -104,14 +107,14 @@ th,td{
 #welcome{
 	width: 25%;
 	float: right;
-	margin-left: 45%;
+	/*margin-left: 45%;*/
 	margin-top: -4%;
 	margin-bottom: 1%;
 	color:white;
 	font-weight: bold;
 	font-size: 16px;
 }
-@media only screen and (max-device-width: 414px) {
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3){
 body{
 	width: 100%;
 }
@@ -119,9 +122,10 @@ table,td,tr,th{
 	width:80%;
 }
 #welcome{
-	width: 100%;
-	float:left;
+	width: 50%;
+	float:right;
 	margin-top: 2%;
+	margin-left: 0%;
 }
 .logoutb{
 	width:90%;
@@ -138,12 +142,19 @@ table,td,tr,th{
 	margin: 0;
 }
 .logout{
-	margin-left: 80%;
+	 margin-left: 50%;
 	margin-top: 20%;
 	margin-bottom: 1%;
 }
 .text{
 	width: 98%;
 	font-size: 40px;
+}
+.confirm{
+	  width: 38%;
+  	margin-left: 50%;
+}
+.addtable{
+		overflow-y:scroll;
 }
 }

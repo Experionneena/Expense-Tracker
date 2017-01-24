@@ -56,7 +56,7 @@ function validateUser(){
 				bootbox.alert({ 
 		            size: "small",
 		            title: "Alert",
-		            message: result.message, 
+		            message: "Invalid login credentials", 
 		            callback: function(){ /* your callback code */ }
 		        })
 			}

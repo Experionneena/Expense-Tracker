@@ -21,15 +21,16 @@
  	<div class="container">
 		<div class="confirm">
 			<table>
-			    <tr><input type="submit" id="current" name="current" placeholder="current password"></tr>
-			    <tr><input type="submit" id="new" name="new" placeholder="new password"></tr>
-			    <tr><input type="submit" id="confirm" name="confirm" placeholder="confirm password"></tr>
+			    <tr><input type="password" id="current" name="current" placeholder="current password"></tr>
+			    <tr><input type="password" id="new" name="new" placeholder="new password"></tr>
+			    <tr><input type="password" id="confirm" name="confirm" placeholder="confirm password"></tr>
 			    <tr><button type="button" class="buttonp" id="submit"onclick="resetPassword()">SUBMIT</button></tr>
 			</table>
 		</div>
-		<div class='table table-responsive'><p class="add">ADD NEW EXPENSE</p>
+		<div class='table'><p class="add">ADD NEW EXPENSE</p>
 			<form method="post" id="empdata" enctype="multipart/form-data">
-		    	<table class="table addtable">
+			<div class="table-responsive">
+					    	<table class="table addtable">
 			    	<tr class="tr">
 			    		<td>Employee id</td>
 			    		<td>Date</td>
@@ -55,10 +56,13 @@
 							</div>
 						</td>
 						<td><input type="text" id="amount" name="amount"></td>
-						<td> <input type="file" name="bill" id="image"></td>
+						<td> <input type="file" name="bill" id="image" accept="image/*"></td>
 						<td><button type="submit" class="buttonp">ADD EXPENSE</button></td>
 			    	</tr>
 			    </table>
+				
+			</div>
+
 			</form>
 			<div id="list"><p class="view">PREVIOUS EXPENSES</p>
 	  			<div id="list1">
@@ -69,7 +73,7 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="script/employee.js"></script>
-
+    <script type="text/javascript" src="script/2.5.3-crypto-md5.js"></script>
 	<link rel="stylesheet" href="style/employee.css">
 </body>
 </html>

@@ -67,20 +67,20 @@ function formValidation() {
 $("form#empdata").submit(function(){
     var formData = new FormData(this);
     console.log(formData);
-    formValidation();
-    //window.location.reload();
-    $.ajax({
-        url: 'http://192.168.1.225:8082/EXPENSE/'+key,
-        type: 'POST',
-        data: formData,
-        async: false,
-        success: function (data) {
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-    });
-     //window.location.reload();
+   if( formValidation()){
+        window.location.reload();
+        $.ajax({
+            url: 'http://192.168.1.225:8082/EXPENSE/'+key,
+            type: 'POST',
+            data: formData,
+            async: false,
+            success: function (data) {
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
     return false;
 });
 
@@ -185,6 +185,8 @@ function resetPassword(){
         bootbox.alert("Wrong password");
     }
     else{
+        current = (Crypto.MD5(current)).toString();
+        newp = (Crypto.MD5(newp)).toString();
         var httpObj=new XMLHttpRequest();
         httpObj.onreadystatechange=function(){
             if(this.readyState=='4' && this.status=='200'){

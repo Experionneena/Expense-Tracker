@@ -14,7 +14,7 @@ adminRouter.get('/EXPENSE/:key',function(request, response){
 		id2=JSON.parse(id2);
 		console.log(id2.token,id2.role);
 		if(id2.token == ""){
-			console.log("valid user");
+			console.log("invalid user");
 		}
 		else{
 			var decoded = jwt.verify(id2.token, 'neena');
@@ -48,13 +48,12 @@ adminRouter.get('/TOTAL/:id/:key',function(request, response){
 			if(decoded.role == id2.role){
 				console.log("valid user");
 			    connection.query("select sum(amount) amount,empname,category from expense,user where expense.empid=user.empid and expense.empid='"+id+"' group by category",function(err,rows){
-			    	if(err){
-			    		console.log(err);
-			    	}
-					var data=JSON.stringify(rows);
+			    	if(!err){
+			    	var data=JSON.stringify(rows);
 					var json=JSON.parse(data);
 					console.log(json);
 					response.send(json);
+				}
 			    });	
 			}
 		}
@@ -98,13 +97,16 @@ adminRouter.post('/EMPLOYEE/:key',function(request, response){
 				var js={'message':""}
 				var post1 = {empid:id,empname:name,password:password,email:email,status:status};
 				connection.query('insert into user set ?',[post1],function(err,rows){
-					var data=JSON.stringify(rows);
-					var json=JSON.parse(data);
 					if(!err){
-						js.message="success";
+						var data=JSON.stringify(rows);
+						var json=JSON.parse(data);
+						js.message = "success";
 						sendMail(email,passwordo);
 					}
-					else console.log(err);
+					else {
+						console.log(err);
+						js.message = "failed";
+					}
 					console.log(json);
 					response.send(js);
 			    });	
@@ -114,6 +116,14 @@ adminRouter.post('/EMPLOYEE/:key',function(request, response){
 			}
 		}
 });
+// adminRouter.post('/PDF/:key',function(request, response){
+// 	console.log("haii");
+// 	request.pipe(request.busboy);
+// 		request.busboy.on('file', function (fieldname, file, filename) {
+// 			console.log("Uploading: " + filename); 
+// 			field["bill"]=filename;
+// 		});
+// });
 
 function generatePassword() {
     var length = 8,
