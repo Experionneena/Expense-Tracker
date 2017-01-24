@@ -16,10 +16,11 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(busboy());
 
-userRouter.get('/EXPENSE/:id/:key',function (request, response){
+userRouter.get('/EXPENSE/:id',function (request, response){
 	var id = request.params.id;
 	var key = {};
-	key = JSON.parse(request.params.key);
+	var id2=request.headers.authorization;
+	key = JSON.parse(id2);
 	if(key.token == ""){
 		console.log("invalid user");
 	}
@@ -36,10 +37,9 @@ userRouter.get('/EXPENSE/:id/:key',function (request, response){
 	}
 });
 
-userRouter.delete('/EXPENSE/:id/:key',function (request, response){
-	var id1 = request.params.id;
-	var id2 = {};
-		id2 = request.params.key;
+userRouter.delete('/EXPENSE/:id',function (request, response){
+		var id1 = request.params.id;
+		var id2=request.headers.authorization;
 		id2 = JSON.parse(id2);
 		console.log(id2.token,id2.role);
 		if(id2.token == ""){
@@ -57,14 +57,15 @@ userRouter.delete('/EXPENSE/:id/:key',function (request, response){
 	   			 });
 			}}
 });
-userRouter.put('/PASSWORD/:key',function (request, response){
+userRouter.put('/PASSWORD',function (request, response){
 	var new1 = request.body.new1;
 	var id = request.body.id;
 	var current = request.body.current;
 	// current = md5(current);
 	// new1 = md5(new1);
+	var id2=request.headers.authorization;
 	console.log(new1,id,current);
-	key = JSON.parse(request.params.key);
+	key = JSON.parse(id2);
 	var js = {'message':""};
 	if (validator.isEmpty(current)){
 	    js.message = "current password missing in server side";  

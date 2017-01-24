@@ -8,9 +8,10 @@ var nodemailer = require('nodemailer');
 var adminRouter = express.Router();
 var connection=mysql.createConnection({host:"localhost",user:"root",password:"neena",database:"expense_tracker"});
 
-adminRouter.get('/EXPENSE/:key',function(request, response){
+adminRouter.get('/EXPENSE',function(request, response){
 		var id2={};
-		id2=request.params.key;
+		//id2=request.params.key;
+		 var id2=request.headers.authorization;
 		id2=JSON.parse(id2);
 		console.log(id2.token,id2.role);
 		if(id2.token == ""){
@@ -33,10 +34,11 @@ adminRouter.get('/EXPENSE/:key',function(request, response){
 		}
 });
 
-adminRouter.get('/TOTAL/:id/:key',function(request, response){
+adminRouter.get('/TOTAL/:id',function(request, response){
 		var id=request.params.id;
 		var id2={};
-		id2=request.params.key;
+		//id2=request.params.key;
+		 var id2=request.headers.authorization;
 		id2=JSON.parse(id2);
 		console.log(id2.token,id2.role);
 		if(id2.token == ""){
@@ -59,9 +61,10 @@ adminRouter.get('/TOTAL/:id/:key',function(request, response){
 		}
 });
 
-adminRouter.post('/EMPLOYEE/:key',function(request, response){
+adminRouter.post('/EMPLOYEE',function(request, response){
 		var id2={};
-		id2=request.params.key;
+		//id2=request.params.key;
+		 var id2=request.headers.authorization;
 		var id=request.body.id;
 		var name=request.body.name;
 		var passwordo=generatePassword();
@@ -116,14 +119,6 @@ adminRouter.post('/EMPLOYEE/:key',function(request, response){
 			}
 		}
 });
-// adminRouter.post('/PDF/:key',function(request, response){
-// 	console.log("haii");
-// 	request.pipe(request.busboy);
-// 		request.busboy.on('file', function (fieldname, file, filename) {
-// 			console.log("Uploading: " + filename); 
-// 			field["bill"]=filename;
-// 		});
-// });
 
 function generatePassword() {
     var length = 8,

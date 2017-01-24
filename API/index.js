@@ -90,24 +90,39 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 		});
 		resolve();
 	}).then(function(){
-		var id = field["empid"];
-		console.log(id);
-		field["date"] = new Date(field["date"]);
-		connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
-              if (!err) {
-				js.status = '200';
-                js.message = "success";
-                console.log(js);
-                sendMail('expensetracker11@gmail.com',id);
-                response.send(js);
-            }
-            else
-            	console.log(err);
-        });
+		if (validator.isEmpty(field["empid"])) {
+			console.log("employee id missing in server side");
+		}
+		else if (validator.isEmpty(field["date"])) {
+			console.log("date  missing in server side");
+		}
+		else if (validator.isEmpty(field["category"])) {
+			console.log("category  missing in server side");
+		}
+		else if (validator.isEmpty(field["amount"])) {
+			console.log("amount missing in server side");
+		}
+		else{
+			var id = field["empid"];
+			console.log(id);
+			field["date"] = new Date(field["date"]);
+			connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
+	              if (!err) {
+					js.status = '200';
+	                js.message = "success";
+	                console.log(js);
+	                sendMail('expensetracker11@gmail.com',id);
+	                response.send(js);
+	            }
+	            else
+	            	console.log(err);
+	        });
+		}
 	}).catch(function(){
 		console.log("uploading failed");
-
-		});
+		js.message = "failed";
+		response.send(js);
+	});
 });
 
 var sendMail=function(toAddress,id) {

@@ -45,8 +45,9 @@ httpObj.onreadystatechange = function(){
 }
 var key = {'token':tokenc,'role':role};
 key = JSON.stringify(key);
-httpObj.open('GET','http://192.168.1.225:8082/EXPENSE/'+key,true);
+httpObj.open('GET','http://192.168.1.225:8082/EXPENSE',true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
+httpObj.setRequestHeader("Authorization", key);
 httpObj.send();
 
 function getTotal(){
@@ -77,8 +78,9 @@ function getTotal(){
         document.getElementById('sum').innerHTML = total;
     }
 }
-httpObj.open('GET','http://192.168.1.225:8082/TOTAL/'+empid+'/'+key,true);
+httpObj.open('GET','http://192.168.1.225:8082/TOTAL/'+empid,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
+httpObj.setRequestHeader("Authorization", key);
 httpObj.send();
 }
 
@@ -188,8 +190,9 @@ function addEmployee(){
         }
     }
 }
-httpObj.open('POST','http://192.168.1.225:8082/EMPLOYEE/'+key,true);
+httpObj.open('POST','http://192.168.1.225:8082/EMPLOYEE',true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
+httpObj.setRequestHeader("Authorization", key);
 httpObj.send('id='+id+'&name='+name+'&email='+email);
 
 }
@@ -231,20 +234,11 @@ var specialElementHandlers = {
 };
 
 $('#cmd').click(function () {
-   var doc = new jsPDF();          
-var elementHandler = {
-  '#ignorePDF': function (element, renderer) {
-    return true;
-  }
-};
-var source = window.document.getElementById("viewe");
-doc.fromHTML(
-    source,
-    15,
-    15,
-    {
-      'width': 180,'elementHandlers': elementHandler
+    doc.fromHTML($('#viewe').html(), 15, 15, {
+        'width': 170,
+            'elementHandlers': specialElementHandlers
     });
-
-var o = doc.output("dataurlnewwindow");
-});
+    window.location.reload();
+    //doc.save('sample-file.pdf');
+    doc.output("dataurlnewwindow");
+})

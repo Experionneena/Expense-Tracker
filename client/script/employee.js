@@ -34,30 +34,47 @@ httpObj.onreadystatechange = function(){
         document.getElementById('welcome').appendChild(t);
     }
 }
-httpObj.open('GET','http://192.168.1.225:8082/EXPENSE/'+id+'/'+key,true);
+httpObj.open('GET','http://192.168.1.225:8082/EXPENSE/'+id,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
+httpObj.setRequestHeader("Authorization", key);
 httpObj.send();
 
 function formValidation() {
     var date = document.getElementById('date').value;
     var amount = document.getElementById('amount').value;
+    var category = document.getElementById('sel1').value;
     var regamt = /^[1-9]\d*(\.\d+)?$/;
-     if (date == "") {
-       alert("Please enter a date ");
+    var regdate =  /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
+    var fup = document.getElementById('image');
+    var fileName = fup.value;
+    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+    if (date == "") {
+       bootbox.alert("Please enter a date ");
+       return false;
+    }
+    else if(category == ""){
+        bootbox.alert("Please enter an category");
         return false;
     }
     else if(amount == ""){
-        alert("Please enter an amount");
+        bootbox.alert("Please enter an amount");
         return false;
     }
-    else if(amount == ""){
-       alert("Please enter an amount");
+    else if (date.search(regdate) == -1) {
+       bootbox.alert("Please enter a date in mm/dd/yyyy format");
+       return false;
+    }
+    else if(amount.search(regamt) == -1){
+        bootbox.alert("Please enter valid amount");
         return false;
     }
-    else if(amount.search(regamt)==-1){
-        alert("Please enter valid amount");
-        return false;
-    }
+    else if(fileName != ""){
+        if(!(ext == "gif" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "doc")){
+            bootbox.alert("Upload Gif or Jpg images only");
+            fup.focus();
+            return false;
+        }
+    } 
      else{
         return true;
     }
@@ -81,7 +98,10 @@ $("form#empdata").submit(function(){
             processData: false
         });
     }
-    return false;
+    
+        return false; 
+    
+   
 });
 
 function deleteExpense(expid){
@@ -106,8 +126,9 @@ function deleteExpense(expid){
             }
         }
     })
-httpObj.open('DELETE','http://192.168.1.225:8082/EXPENSE/'+expid+'/'+key,true);
+httpObj.open('DELETE','http://192.168.1.225:8082/EXPENSE/'+expid,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
+httpObj.setRequestHeader("Authorization", key);
 httpObj.send();
 }
 
@@ -219,8 +240,9 @@ function resetPassword(){
             }
         }
     }
-httpObj.open('PUT','http://192.168.1.225:8082/PASSWORD/'+key,true);
+httpObj.open('PUT','http://192.168.1.225:8082/PASSWORD',true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
+httpObj.setRequestHeader("Authorization", key);
 httpObj.send('id='+id+'&current='+current+'&new1='+newp);
 }
 
