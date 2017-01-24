@@ -13,6 +13,10 @@ function validateForm() {
         bootbox.alert("Please enter password");
         return false;
     }
+    else if(id.search( /^\d+$/) == -1){
+        bootbox.alert("Please enter a valid userid");
+        return false;
+    }
      else{
         validateUser();
     }

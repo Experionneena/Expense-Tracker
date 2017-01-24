@@ -10,6 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="script/bootbox.min.js"></script>
   <link rel="stylesheet" href="style/admin.css">
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
 </head>
 
 <body>
@@ -50,25 +51,34 @@
 			    		<td></td>
 			    		<td></td>
 			    	</tr>
-			    	<tr>
+			    	<tr >
 			    		<td><select class="form-control" id="sel1" name="employeeid"></select></td>
 			    		<td><button type="button" onclick="getTotal()" class="buttonp">VIEW TOTAL EXPENSE</button></td> 
-			    		<td><span id="name"></span></td>
-			    		<td id="tdc">Accomodation :<span id="Accomodation">0.00</span></td>
-			    		<td id="tdc">Food :<span id="Food">0.00</span></td>
-			    		<td id="tdc">Fuel :<span id="Fuel">0.00</span></td>
-			    		<td id="tdc">Health :<span id="Health">0.00</span></td>
-			    		<td id="tdc">Travel :<span id="Travel">0.00</span></td>
-			    		<td id="tdc">Others :<span id="Others">0.00</span></td>
-			    		<td id="tdc">Grand Total :<span id="sum">0.00</span></td>
-			    		<td></td>
-			    		<td></td>
 			    	</tr>
+			    	<tr id="viewe">
+			    		<!-- <div id="viewe"> -->
+				    		<td><span id="name"></span></td>
+				    		<td id="tdc">Accomodation :<span id="Accomodation">0.00</span></td>
+				    		<td id="tdc">Food :<span id="Food">0.00</span></td>
+				    		<td id="tdc">Fuel :<span id="Fuel">0.00</span></td>
+				    		<td id="tdc">Health :<span id="Health">0.00</span></td>
+				    		<td id="tdc">Travel :<span id="Travel">0.00</span></td>
+				    		<td id="tdc">Others :<span id="Others">0.00</span></td>
+				    		<td id="tdc">Grand Total :<span id="sum">0.00</span></td>
+				    		<td></td>
+				    		<td></td>
+			    			
+			    		<!-- </div> -->
+
+			    		
+			    	</tr>
+			    	
 			    </table>
+			    <tr><button id="cmd" class="buttonp">generate PDF</button></tr>
 			</form>
-			<div class="container"><p class="addp"><u>EXPENSES</u></p>
-				<div id="list">
-				</div>
+		</div>
+		<div class="container"><p class="addp"><u>EXPENSES</u></p>
+			<div id="list">
 			</div>
 		</div>
 	</div>

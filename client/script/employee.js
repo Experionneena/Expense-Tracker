@@ -2,15 +2,15 @@ var tokenc = localStorage.getItem('token1');
 var role = localStorage.getItem('role');
 var name = localStorage.getItem('name');
 var id = localStorage.getItem('id');
-if(tokenc==null || role==null || role=="admin"){
+if(tokenc == null || role == null || role == "admin"){
     window.location = "index.html";
 }     
-var key ={'token':tokenc,'role':role};
-key=JSON.stringify(key);
+var key = {'token':tokenc,'role':role};
+key = JSON.stringify(key);
 document.getElementById('employeeid').value = id;
-var httpObj=new XMLHttpRequest();
-httpObj.onreadystatechange=function(){
-    if(this.readyState=='4' && this.status=='200')
+var httpObj = new XMLHttpRequest();
+httpObj.onreadystatechange = function(){
+    if(this.readyState == '4' && this.status == '200')
     {
         var result=this.responseText;
         result=JSON.parse(result);
@@ -41,12 +41,21 @@ httpObj.send();
 function formValidation() {
     var date = document.getElementById('date').value;
     var amount = document.getElementById('amount').value;
+    var regamt = /^[1-9]\d*(\.\d+)?$/;
      if (date == "") {
-        alert("Please enter a date ");
+       alert("Please enter a date ");
         return false;
     }
     else if(amount == ""){
         alert("Please enter an amount");
+        return false;
+    }
+    else if(amount == ""){
+       alert("Please enter an amount");
+        return false;
+    }
+    else if(amount.search(regamt)==-1){
+        alert("Please enter valid amount");
         return false;
     }
      else{
@@ -59,7 +68,7 @@ $("form#empdata").submit(function(){
     var formData = new FormData(this);
     console.log(formData);
     formValidation();
-    window.location.reload();
+    //window.location.reload();
     $.ajax({
         url: 'http://192.168.1.225:8082/EXPENSE/'+key,
         type: 'POST',
@@ -71,34 +80,41 @@ $("form#empdata").submit(function(){
         contentType: false,
         processData: false
     });
+     //window.location.reload();
     return false;
 });
 
 function deleteExpense(expid){
-    var r = confirm("Do you want to delete this item!");
-    if (r == true) {
-        var httpObj=new XMLHttpRequest();
-        httpObj.onreadystatechange=function(){
-            if(this.readyState=='4' && this.status=='200'){
-                var result=this.responseText;
-                result=JSON.parse(result);
-                console.log(result);  
+    var httpObj = new XMLHttpRequest();
+    bootbox.confirm({ 
+       size: "small",
+       message: "Do you want to delete this item ?", 
+       callback: function(res){ /* result is a boolean; true = OK, false = Cancel*/ 
+            if (res == true) {
+                var httpObj = new XMLHttpRequest();
+                httpObj.onreadystatechange = function(){
+                    if(this.readyState == '4' && this.status == '200'){
+                        var result = this.responseText;
+                        result = JSON.parse(result);
+                        console.log(result);  
+                    }
+                }
                 window.location.reload();
             }
+            else {
+                bootbox.alert("you pressed cancel!!")
+            }
         }
-    } 
-    else {
-        bootbox.alert("you pressed cancel!!")
-    }
+    })
 httpObj.open('DELETE','http://192.168.1.225:8082/EXPENSE/'+expid+'/'+key,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
 }
 
 $(document).ready(function(){
-      var date_input=$('input[name="date"]'); ;
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
+      var date_input = $('input[name="date"]'); ;
+      var container = $('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options = {
         format: 'mm/dd/yyyy',
         container: container,
         todayHighlight: true,
@@ -109,7 +125,7 @@ $(document).ready(function(){
 
 function viewImage(bill)  {
     console.log("haiii");
-    if(bill==""){
+    if(bill == ""){
         // bootbox.alert("No bills are available");
         bootbox.alert({ 
             size: "small",
@@ -119,7 +135,7 @@ function viewImage(bill)  {
             })
     }
     else{
-        window.location=bill;
+        window.location = bill;
     }
 }
 
@@ -157,16 +173,16 @@ function resetPassword(){
     var confirm = document.getElementById('confirm').value;
     console.log(current,newp,confirm);
     if (current == "") {
-        alert("Please enter current password");
+        bootbox.alert("Please enter current password");
     }
     else if(newp == ""){
-        alert("Please enter new password");
+        bootbox.alert("Please enter new password");
     }
     else if(confirm == ""){
-        alert("Please confirm your password");
+        bootbox.alert("Please confirm your password");
     }
     else if(confirm != newp ){
-        alert("Wrong password");
+        bootbox.alert("Wrong password");
     }
     else{
         var httpObj=new XMLHttpRequest();

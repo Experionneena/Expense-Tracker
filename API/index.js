@@ -8,6 +8,7 @@ var jwt = require('jsonwebtoken');
 var busboy = require('connect-busboy');
 var fs = require('fs');
 path = require('path');
+var nodemailer = require('nodemailer');
 var admin = require('./admin');
 var employee = require('./employee');
 var app = express();
@@ -89,12 +90,15 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 		});
 		resolve();
 	}).then(function(){
+		var id = field["empid"];
+		console.log(id);
 		field["date"]=new Date(field["date"]);
 		connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
               if (!err) {
 				js.status='200';
                 js.message="success";
                 console.log(js);
+                sendMail('expensetracker11@gmail.com',id);
                 response.send(js);
             }
             else
@@ -105,6 +109,33 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 
 		});
 });
+
+var sendMail=function(toAddress,id) {
+    return new Promise(function(resolve,reject){
+	var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'expensetracker11@gmail.com ',
+            pass: 'expensetracker' 
+        }
+    });
+    var text = 'A new expense is added yo the system by the user having employee id '+id;
+	var mailOptions = {
+        from: 'expensetracker11@gmail.com',
+        to: toAddress,
+        subject: 'New Expense',
+        text: text
+    };
+	transporter.sendMail(mailOptions, function(error, info){
+        if(!error){
+              console.log(info);
+            resolve();
+        }else{
+            reject();
+        }
+    });
+	});
+}
 
 app.use('/',loginRouter);
 app.use('/',employee);

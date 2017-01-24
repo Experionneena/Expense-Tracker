@@ -7,8 +7,10 @@ body{
 	overflow-x:auto
 }
 .table{
-	background-color: #ffff;
+	width: 95%;
+	background-color: #ffffff;
 	margin-top: 1%;
+	 margin-left: 2%;
 }
 .container {
     width: 100%;
@@ -45,6 +47,7 @@ body{
 .logoutb{
 	width:30%;
 	margin-bottom: 2%;
+	 margin-left: 2%;
 }
 .add{
 	font-size: 30px;
@@ -107,6 +110,7 @@ th{
 	color:white;
 	border-style: none;
 	margin-top: 1%;
+	margin-left: 2%;
 }
 .dataTables_filter{
 	width:70%!important;

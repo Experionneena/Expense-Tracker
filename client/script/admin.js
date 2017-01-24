@@ -1,31 +1,31 @@
 var tokenc = localStorage.getItem('token1');
 var role = localStorage.getItem('role');
-if(tokenc==null || role==null || role=="user"){
+if(tokenc == null || role == null || role == "user"){
     window.location = "index.html";
 }     
 console.log(role);   
-var empidarr=[];   
-var total=0; 
+var empidarr = [];   
+var total = 0; 
 total=parseInt(total);
 console.log(total); 
 $(document).ready(function() {
     $('#table').DataTable();
 } );
 
-var httpObj=new	XMLHttpRequest();
-httpObj.onreadystatechange=function(){
-	if(this.readyState=='4' && this.status=='200')
+var httpObj = new	XMLHttpRequest();
+httpObj.onreadystatechange = function(){
+	if(this.readyState == '4' && this.status == '200')
 	{
-        var result=this.responseText;
-		result=JSON.parse(result);
-        var empidarr=[];
+        var result = this.responseText;
+		result = JSON.parse(result);
+        var empidarr = [];
 		var table = document.getElementById('tablebody');
 		content = "<div class='table-responsive'><table class='table table-hover' id='table'><thead><tr><th>No.</th><th></th><th>Name</th><th></th><th>Employee id</th><th></th><th>Date</th><th></th><th>Category</th><th></th><th>Amount</th><th></th><th>Bill</th></tr></thead><tbody>";
         var i = 1;
         result.forEach(function(element) {
             var d = new Date(element.date);
             content += `<tr><td>${i}</td><td></td><td>${element.empname}</td><td></td><td>${element.empid}</td><td></td><td>${element.date}</td><td></td><td>${element.category}</td><td></td><td>${element.amount}</td><td></td><td id='bill'><button class='buttonp' onclick="viewImage('${element.bill}')">View bill</button></td></tr>`;
-            empidarr[i-1]= element.empid;
+            empidarr[i-1] = element.empid;
             i++;
         });
         content += "</tbody> </table> </div>";
@@ -40,41 +40,41 @@ httpObj.onreadystatechange=function(){
               var option1 = document.createElement("option");
               option1.text = item;
               option1.value = item;
-              option1.innerHTML=item;
+              option1.innerHTML = item;
               li.appendChild(option1); 
         }
         console.log(uniques.length);         
     }
 }
-var key ={'token':tokenc,'role':role};
-key=JSON.stringify(key);
+var key = {'token':tokenc,'role':role};
+key = JSON.stringify(key);
 httpObj.open('GET','http://192.168.1.225:8082/EXPENSE/'+key,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.send();
 
 function getTotal(){
-    document.getElementById('Accomodation').innerHTML= "0.00";
-    document.getElementById('Food').innerHTML= "0.00";
-    document.getElementById('Fuel').innerHTML= "0.00";
-    document.getElementById('Health').innerHTML= "0.00";
-    document.getElementById('Travel').innerHTML= "0.00";
-    document.getElementById('Others').innerHTML= "0.00";
-    document.getElementById('sum').innerHTML= "0.00";
-    var select= document.getElementById('sel1');
-    var empid=select.options[select.selectedIndex].value;
+    document.getElementById('Accomodation').innerHTML = "0.00";
+    document.getElementById('Food').innerHTML = "0.00";
+    document.getElementById('Fuel').innerHTML = "0.00";
+    document.getElementById('Health').innerHTML = "0.00";
+    document.getElementById('Travel').innerHTML = "0.00";
+    document.getElementById('Others').innerHTML = "0.00";
+    document.getElementById('sum').innerHTML = "0.00";
+    var select = document.getElementById('sel1');
+    var empid = select.options[select.selectedIndex].value;
     console.log("empid"+empid);
-    var obj={};
+    var obj =  {};
     var httpObj = new XMLHttpRequest();
     httpObj.onreadystatechange=function(){
     if(this.readyState == '4' && this.status == '200')
     {
-        var result=this.responseText;
-        result=JSON.parse(result);
-        total=0;
+        var result = this.responseText;
+        result = JSON.parse(result);
+        total = 0;
         result.forEach(function(element){
             document.getElementById(element.category).innerHTML = element.amount;
-            amount=parseInt(element.amount);
-            total =total+element.amount;
+            amount = parseInt(element.amount);
+            total = total + element.amount;
         });
         document.getElementById('name').innerHTML = 'EMPLOYEE NAME : '+result[0].empname;
         document.getElementById('sum').innerHTML = total;
@@ -113,7 +113,7 @@ function logout(){
 
 function viewImage(bill)  {
     console.log("haiii");
-    if(bill==""){
+    if(bill == ""){
         // bootbox.alert("No bills are available");
         bootbox.alert({ 
             size: "small",
@@ -123,7 +123,7 @@ function viewImage(bill)  {
         })
     }
     else{
-        window.location=bill;
+        window.location = bill;
     }
 }
 
@@ -131,39 +131,44 @@ function validateForm() {
     var id = document.forms["validation"]["id"].value;
     var name = document.forms["validation"]["name1"].value;
     var email = document.getElementById('mailid').value;
+    var regex = /^[a-zA-Z ]{2,30}$/;
     var matching = email.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/);
     var reg = /^\d+$/;
     if (id == "") {
-        alert("Please enter employee id");
+        bootbox.alert("Please enter employee id");
         return false;
     }
     else if(id == ""){
-        alert("Please enter user id");
+        bootbox.alert("Please enter user id");
         return false;
     }
     else if(name == ""){
-        alert("Please enter name of employee");
+        bootbox.alert("Please enter name of employee");
         return false;
     }
      else if(email == ""){
-        alert("Please enter email of employee");
+        bootbox.alert("Please enter email of employee");
         return false;
     }
-    else if(id.search(reg)==-1)
+    else if(id.search(reg) == -1)
      {
-         window.alert("invalid employee id");
+         bootbox.alert("invalid employee id");
+        return false;
+    }
+    else if (!regex.test(name)) {
+        bootbox.alert("invalid employee name");
         return false;
     }
      
-    else if(matching==null)
+    else if(matching == null)
     {
-      window.alert("invalid email format");
+      bootbox.alert("invalid email format");
       return false;
     }
     
-     else{
+    else{
           addEmployee();
-     }
+    }
 }
 
 function addEmployee(){
@@ -171,14 +176,14 @@ function addEmployee(){
     var name = document.getElementById('name1').value;
     var email = document.getElementById('mailid').value;
     console.log(id,name,email);
-    httpObj.onreadystatechange=function(){
+    httpObj.onreadystatechange = function(){
     if(this.readyState == '4' && this.status == '200')
     {
-        var result=this.responseText;
-        result=JSON.parse(result);
+        var result = this.responseText;
+        result = JSON.parse(result);
         console.log(result);
         if(result.message == "success"){
-            window.alert("Added a new employee successfully");
+            bootbox.alert("Added a new employee successfully");
             window.location.reload();
         }
     }
@@ -213,4 +218,19 @@ $('#addp').click(function () {
 
 $('#adde').click(function () {
     $('.addform').toggle();
+});
+
+var doc = new jsPDF();
+var specialElementHandlers = {
+    '#editor': function (element, renderer) {
+        return true;
+    }
+};
+
+$('#cmd').click(function () {
+    doc.fromHTML($('#viewe').html(), 15, 15, {
+        'width': 170,
+            'elementHandlers': specialElementHandlers
+    });
+    doc.save('sample-file.pdf');
 });
