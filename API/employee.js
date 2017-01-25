@@ -50,19 +50,28 @@ userRouter.delete('/EXPENSE/:id',function (request, response){
 			console.log(decoded);
 			if(decoded.role == id2.role){
 				console.log("valid user");
+				connection.query('select bill from expense where expense.expense_id = "'+id1+'"',function(err,rows){
+					var data = JSON.stringify(rows);
+					var json = JSON.parse(data);
+					var filename = json[0].bill;
+					console.log(filename);
+					if(filename == ""){ return false;}
+					fs.unlink(__dirname + '/images/' + filename);
+				});
 				connection.query('delete from expense where expense.expense_id = "'+id1+'"',function(err,rows){
 					var data = JSON.stringify(rows);
 					var json = JSON.parse(data);
+					console.log(json);
 					response.send(json);
 	   			 });
-			}}
+			}
+		}
 });
+
 userRouter.put('/PASSWORD',function (request, response){
 	var new1 = request.body.new1;
 	var id = request.body.id;
 	var current = request.body.current;
-	// current = md5(current);
-	// new1 = md5(new1);
 	var id2=request.headers.authorization;
 	console.log(new1,id,current);
 	key = JSON.parse(id2);
@@ -105,7 +114,6 @@ userRouter.put('/PASSWORD',function (request, response){
 				console.log(js);
 				response.send(js);
 			});
-
 		}
 	}
 });

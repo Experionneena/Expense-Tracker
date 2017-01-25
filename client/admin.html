@@ -1,89 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Admin Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css"> 
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="script/bootbox.min.js"></script>
-  <link rel="stylesheet" href="style/admin.css">
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
-</head>
+	<head>
+	  <title>Admin Home</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css"> 
+	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> 
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script type="text/javascript" src="script/bootbox.min.js"></script>
+	  <link rel="stylesheet" href="style/admin.css">
+	  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+	</head>
 
-<body style="overflow-x:auto">
-	<div class="main">
-		<div class="header">
-			<div class="icon"><img class="image" src="images/expense.png"></div>
-			<div class="text">EXPENSE TRACKER</div>
-			<div id="welcome">WELCOME ADMIN</div>
-			<div class="logout"><button type="button" class="logoutb" onclick="logout()">LOGOUT</button></div>
-		</div>
-		<div class="view addemp"><p class="add" id="adde"><a><u>ADD A NEW EMPLOYEE</u></a></p>
-			<form method="post" id="add" name="validation" class="addform">
-				<div style="overflow-x:auto">
-					<table class="table addtable table-responsive">
-				    	<tr class="tr">
-				    		<td>Employee Id</td>
-				    		<td>Employee Name</td>
-				    		<td>Email Id</td>
-				    		<td></td>
-				   		</tr>
+	<body style="overflow-x:auto">
+		<div class="main">
+			<div class="header">
+				<div class="icon"><img class="image" src="images/expense.png"></div>
+				<div class="text">EXPENSE TRACKER</div>
+				<div id="welcome">WELCOME ADMIN</div>
+				<div class="logout"><button type="button" class="logoutb" onclick="logout()">LOGOUT</button></div>
+			</div>
+			<div class="view addemp"><p class="add" id="adde"><a><u>ADD A NEW EMPLOYEE</u></a></p>
+				<form method="post" id="add" name="validation" class="addform">
+					<div style="overflow-x:auto">
+						<table class="table addtable table-responsive">
+					    	<tr class="tr">
+					    		<td>Employee Id</td>
+					    		<td>Employee Name</td>
+					    		<td>Email Id</td>
+					    		<td></td>
+					   		</tr>
+					    	<tr>
+					    		<td><input type="text" id="id"></td>
+					    		<td><input type="text" id="name1"></td> 
+					    		<td><input type="text" id="mailid"></td>
+					    		<td><button type="button" onclick="validateForm()" class="buttonp">ADD EMPLOYEE</button></td>  
+					    	</tr>
+					    </table>
+					</div>
+				</form>
+			</div> 
+			<div class="view viewemp"><p class="add" id="addp"><a><u>VIEW INDIVIDUAL EXPENSES</u></a></p> 
+				<div id="view" class="viewform">
+			    	<table class="table addtable">
 				    	<tr>
-				    		<td><input type="text" id="id"></td>
-				    		<td><input type="text" id="name1"></td> 
-				    		<td><input type="text" id="mailid"></td>
-				    		<td><button type="button" onclick="validateForm()" class="buttonp">ADD EMPLOYEE</button></td>  
+				    		<td>Employee id</td>
+				    		<td></td>
+				    		<td></td>
+				    		<td></td>
+				    		<td></td>
 				    	</tr>
-				    </table>
+				    	<tr >
+				    		<td><select class="form-control" id="sel1" name="employeeid"></select></td>
+				    		<td><button type="button" id="totalp" onclick="getTotal()" class="buttonp">VIEW TOTAL EXPENSE</button></td> 
+				    	</tr>
+				    	<tr id="viewe">
+					    	<td><span id="name"></span></td>
+					    	<td id="tdc">Accomodation :<span id="Accomodation">0.00</span></td>
+					    	<td id="tdc">Food :<span id="Food">0.00</span></td>
+					    	<td id="tdc">Fuel :<span id="Fuel">0.00</span></td>
+					    	<td id="tdc">Health :<span id="Health">0.00</span></td>
+					    	<td id="tdc">Travel :<span id="Travel">0.00</span></td>
+					    	<td id="tdc">Others :<span id="Others">0.00</span></td>
+					    	<td id="tdc">Grand Total :<span id="sum">0.00</span></td>
+					    	<td></td>
+					    	<td></td>
+					    </tr>
+				  		<tr></tr>
+				  	</table>
+				  	<button id="cmd" class="buttonp">generate PDF</button>
 				</div>
-			</form>
-		</div> 
-		<div class="view viewemp"><p class="add" id="addp"><a><u>VIEW INDIVIDUAL EXPENSES</u></a></p> 
-			<div id="view" class="viewform">
-		    	<table class="table addtable">
-			    	<tr>
-			    		<td>Employee id</td>
-			    		<td></td>
-			    		<td></td>
-			    		<td></td>
-			    		<td></td>
-			    	</tr>
-			    	<tr >
-			    		<td><select class="form-control" id="sel1" name="employeeid"></select></td>
-			    		<td><button type="button" id="totalp" onclick="getTotal()" class="buttonp">VIEW TOTAL EXPENSE</button></td> 
-			    	</tr>
-			    	<tr id="viewe">
-				    	<td><span id="name"></span></td>
-				    	<td id="tdc">Accomodation :<span id="Accomodation">0.00</span></td>
-				    	<td id="tdc">Food :<span id="Food">0.00</span></td>
-				    	<td id="tdc">Fuel :<span id="Fuel">0.00</span></td>
-				    	<td id="tdc">Health :<span id="Health">0.00</span></td>
-				    	<td id="tdc">Travel :<span id="Travel">0.00</span></td>
-				    	<td id="tdc">Others :<span id="Others">0.00</span></td>
-				    	<td id="tdc">Grand Total :<span id="sum">0.00</span></td>
-				    	<td></td>
-				    	<td></td>
-				    </tr>
-			  		<tr></tr>
-			  	</table>
-			  	<button id="cmd" class="buttonp">generate PDF</button>
+			</div>
+			<div class="container"><p class="addp"><u>EXPENSES</u></p>
+				<div id="list">
+				</div>
 			</div>
 		</div>
-		<div class="container"><p class="addp"><u>EXPENSES</u></p>
-			<div id="list">
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="script/admin.js"></script>
-	<script type="text/javascript" src="script/2.5.3-crypto-md5.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+		<script type="text/javascript" src="script/admin.js"></script>
+		<script type="text/javascript" src="script/2.5.3-crypto-md5.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 
-	<script src="jsPDF.js"></script>
-</body>
+		<script src="jsPDF.js"></script>
+	</body>
 </html>

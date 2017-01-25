@@ -1,17 +1,14 @@
 var tokenc = localStorage.getItem('token1');
 var role = localStorage.getItem('role');
-if(tokenc == null || role == null || role == "user"){
+if (tokenc == null || role == null || role == "user"){
     window.location = "index.html";
 }     
-console.log(role);   
 var empidarr = [];   
 var total = 0; 
 total=parseInt(total);
-console.log(total); 
 var httpObj = new	XMLHttpRequest();
-httpObj.onreadystatechange = function(){
-	if(this.readyState == '4' && this.status == '200')
-	{
+httpObj.onreadystatechange = function() {
+	if(this.readyState == '4' && this.status == '200') {
         var result = this.responseText;
 		result = JSON.parse(result);
         var empidarr = [];
@@ -50,7 +47,7 @@ httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.setRequestHeader("Authorization", key);
 httpObj.send();
 
-function getTotal(){
+function getTotal() {
     document.getElementById('Accomodation').innerHTML = "0.00";
     document.getElementById('Food').innerHTML = "0.00";
     document.getElementById('Fuel').innerHTML = "0.00";
@@ -63,32 +60,31 @@ function getTotal(){
     console.log("empid"+empid);
     var obj =  {};
     var httpObj = new XMLHttpRequest();
-    httpObj.onreadystatechange=function(){
-    if(this.readyState == '4' && this.status == '200')
-    {
-        var result = this.responseText;
-        result = JSON.parse(result);
-        total = 0;
-        result.forEach(function(element){
-            document.getElementById(element.category).innerHTML = element.amount;
-            amount = parseInt(element.amount);
-            total = total + element.amount;
-        });
-        document.getElementById('name').innerHTML = 'EMPLOYEE NAME : '+result[0].empname;
-        document.getElementById('sum').innerHTML = total;
+    httpObj.onreadystatechange=function() {
+    if (this.readyState == '4' && this.status == '200') {
+            var result = this.responseText;
+            result = JSON.parse(result);
+            total = 0;
+            result.forEach( function(element) {
+                document.getElementById(element.category).innerHTML = element.amount;
+                amount = parseInt(element.amount);
+                total = total + element.amount;
+            });
+            document.getElementById('name').innerHTML = 'EMPLOYEE NAME : '+result[0].empname;
+            document.getElementById('sum').innerHTML = total;
+        }
     }
-}
 httpObj.open('GET','http://192.168.1.225:8082/TOTAL/'+empid,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.setRequestHeader("Authorization", key);
 httpObj.send();
 }
 
-function logout(){
+function logout() {
    bootbox.confirm({ 
        size: "small",
        message: "Do you want to logout ?", 
-       callback: function(result){ /* result is a boolean; true = OK, false = Cancel*/ 
+       callback: function(result) {
             if (result == true) {
                 localStorage.setItem('token1',null);
                 localStorage.setItem('role',null);
@@ -96,8 +92,7 @@ function logout(){
                 window.location.reload();
                 window.location = 'index.html';
             }
-            else{
-                // bootbox.alert("you pressed cancel!!");
+            else {
                 bootbox.alert({ 
                     size: "small",
                     title: "Alert",
@@ -109,18 +104,17 @@ function logout(){
     });
 }
 
-function viewImage(bill)  {
+function viewImage(bill) {
     console.log("haiii");
-    if(bill == ""){
-        // bootbox.alert("No bills are available");
+    if (bill == "") {
         bootbox.alert({ 
             size: "small",
             title: "Alert",
             message: "No bills are available for this expense...", 
-            callback: function(){ /* your callback code */ }
+            callback: function() {}
         })
     }
-    else{
+    else {
         window.location = bill;
     }
 }
@@ -136,36 +130,32 @@ function validateForm() {
         bootbox.alert("Please enter employee id");
         return false;
     }
-    else if(id == ""){
+    else if (id == "") {
         bootbox.alert("Please enter user id");
         return false;
     }
-    else if(name == ""){
+    else if (name == "") {
         bootbox.alert("Please enter name of employee");
         return false;
     }
-     else if(email == ""){
+    else if (email == "") {
         bootbox.alert("Please enter email of employee");
         return false;
     }
-    else if(id.search(reg) == -1)
-     {
-         bootbox.alert("invalid employee id");
+    else if (id.search(reg) == -1) {
+        bootbox.alert("invalid employee id");
         return false;
     }
     else if (!regex.test(name)) {
         bootbox.alert("invalid employee name");
         return false;
     }
-     
-    else if(matching == null)
-    {
-      bootbox.alert("invalid email format");
-      return false;
+    else if (matching == null) {
+        bootbox.alert("invalid email format");
+        return false;
     }
-    
     else{
-          addEmployee();
+        addEmployee();
     }
 }
 
@@ -174,22 +164,21 @@ function addEmployee(){
     var name = document.getElementById('name1').value;
     var email = document.getElementById('mailid').value;
     console.log(id,name,email);
-    httpObj.onreadystatechange = function(){
-    if(this.readyState == '4' && this.status == '200')
-    {
-        var result = this.responseText;
-        result = JSON.parse(result);
-        console.log(result);
-        if(result.message == "success"){
-            alert("Added a new employee successfully");
-            window.location.reload();
-        }
-        else if(result.message == "failed"){
-            alert("Employee is already added");
-            window.location.reload();
+    httpObj.onreadystatechange = function() {
+        if (this.readyState == '4' && this.status == '200') {
+            var result = this.responseText;
+            result = JSON.parse(result);
+            console.log(result);
+            if (result.message == "success") {
+                alert("Added a new employee successfully");
+                window.location.reload();
+            }
+            else if (result.message == "failed") {
+                alert("Employee is already added");
+                window.location.reload();
+            }
         }
     }
-}
 httpObj.open('POST','http://192.168.1.225:8082/EMPLOYEE',true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.setRequestHeader("Authorization", key);
@@ -216,12 +205,12 @@ Array.prototype.unique = function() {
 
 $('#addp').click(function () {
     $('.viewform').toggle();
-      
 });
 
 $('#adde').click(function () {
     $('.addform').toggle();
 });
+
 $('#totalp').click(function () {
     $('#viewe').show();
 });
@@ -239,6 +228,5 @@ $('#cmd').click(function () {
             'elementHandlers': specialElementHandlers
     });
     window.location.reload();
-    //doc.save('sample-file.pdf');
     doc.output("dataurlnewwindow");
 })
