@@ -7,10 +7,10 @@ body{
 	overflow-x:auto
 }
 .table{
-	width: 95%;
-	background-color: #ffffff;
-	margin-top: 1%;
-	 margin-left: 2%;
+    width: 70%;
+    background-color: #ffffff;
+    margin-top: 1%;
+    margin-left: 10%;
 }
 .container {
     width: 100%;
@@ -20,7 +20,9 @@ body{
 	background-color: #61BB4F; 
 	float: left;
 	width: 100%;
-	margin-bottom: 1%;
+}
+label{
+	color:#61BB4F;
 }
 .text{
 	color: white;
@@ -47,7 +49,7 @@ body{
 .logoutb{
 	width:30%;
 	margin-bottom: 2%;
-	 margin-left: 2%;
+	margin-left: 2%;
 }
 .add{
 	font-size: 30px;
@@ -62,9 +64,26 @@ body{
 	margin-top: 2%
 }
 th,td{
-	padding: 8px!important;
+	padding: 1%!important;
 }
-#tdc{
+#mbody{
+	padding: 3%;
+	width: 100%;
+}
+#tablemodal td{
+	padding: 5%!important;
+}
+.addemp{
+	float: left;
+	width:70%;
+	padding: 2%;
+	background-color: #ffffff;
+	margin-left: 10%;
+}
+#tdname{
+	width: 25%;
+}
+#tdc,#tdc1{
     color: #61BB4F;
 	font-size: 15px;
 	float: right;
@@ -96,9 +115,8 @@ th{
     margin-left: 2%;
 }
 #welcome{
-	width: 25%;
+	width: 23%;
 	float: right;
-	/*margin-left: 45%;*/
 	margin-top: -4%;
 	margin-bottom: 1%;
 	color:white;
@@ -109,8 +127,17 @@ th{
 	background-color: #61BB4F;
 	color:white;
 	border-style: none;
-	margin-top: 1%;
-	margin-left: 7%;
+	margin-left: 10%;
+   padding: 2%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+#id,#name1,#mailid{
+	margin-bottom: 3%;
+	width:75%;
+}
+label{
+	font-size: 18px!important;
 }
 .dataTables_filter{
 	width:70%!important;
@@ -128,8 +155,11 @@ input[type="search"] {
 .tr{
 	background-color:#61BB4F; 
 }
+input{
+	width:40%;
+}
 span {
-   cursor: pointer;
+    cursor: pointer;
 	color: #61BB4F;
 	font-size: 15px;
 	float: right;
@@ -137,7 +167,7 @@ span {
 	font-weight: bold;
 }
 .spanv {
-   cursor: pointer;
+    cursor: pointer;
 	color: #61BB4F;
 	font-size: 20px;
 	float: right;
@@ -151,23 +181,43 @@ span {
     margin-top: 2%;
     margin-left: 20px;
 }
-.viewform{
-	display: none;
-}
-.addform{
-	display: none;
-}
 a{
-	color: #61BB4F;
+	color: #61BB4F!important;
+	font-size: 20px;
+	font-weight: bold;
 }
 a:hover {
-	color: #61BB4F;
-    background-color: #ffff;
+	color: #ffffff!important;
+	background-color: transparent!important;
+	background-color: #61BB4F!important;
+	font-size: 20px;
+	font-weight: bold;
 }
 #viewe
 {
 	display:none;
 }
+.sidebar{
+	width:100%;
+	float:left;
+	margin-top: :5%;
+}
+.navbar-inverse {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+#list{
+	width: 80%;
+    margin-left: 5%;
+}
+thead{
+	color:#ffffff;
+}
+#hide,#hide1{
+	display: none;
+
+}
+
 @media only screen and (max-device-width: 414px) {
 body{
 	width: 100%;
@@ -202,6 +252,46 @@ body{
 	font-size: 40px;
 }
 #sel1{
+	width: 70%;
+}
+#list {
+  width: 100%;
+  margin-left: 0px;
+}
+.addemp
+{
+  width: 100%;
+  margin-left: 6%;
+  padding: 5%;
+}
+.table{
+  width: 95%;
+  background-color: #ffffff;
+  margin-top: 1%;
+  margin-left: 3%;
+}
+#tdc{
 	width: 100%;
+}
+#tdc, #tdc1 {
+  color: #61BB4F;
+  font-size: 15px;
+  float: right;
+  margin-bottom: 2%;
+  font-weight: bold;
+  width: 100%;
+  padding: 0px !important;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  float: left;
+}
+#tdname{
+   width: 100%;
+  float: left;
+}
+#hide{
+	display: none;
 }
 }

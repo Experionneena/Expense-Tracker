@@ -6,38 +6,26 @@ if (tokenc == null || role == null || role == "user"){
 var empidarr = [];   
 var total = 0; 
 total=parseInt(total);
-var httpObj = new	XMLHttpRequest();
+var httpObj = new  XMLHttpRequest();
 httpObj.onreadystatechange = function() {
-	if(this.readyState == '4' && this.status == '200') {
+    if(this.readyState == '4' && this.status == '200') {
         var result = this.responseText;
-		result = JSON.parse(result);
+        result = JSON.parse(result);
         var empidarr = [];
-		var table = document.getElementById('tablebody');
-		content = "<div class='table-responsive'><table class='table table-hover' id='table'><thead><tr><th>No.</th><th></th><th>Name</th><th></th><th>Employee id</th><th></th><th>Date</th><th></th><th>Category</th><th></th><th>Amount</th><th></th><th>Bill</th></tr></thead><tbody>";
+        var table = document.getElementById('tablebody');
+        content = "<div class='table-responsive'><table class='table table-hover' id='table'><thead><tr><th>Employee Name</th><th>Date</th><th id='hide'>Category</th><th>View Details</th></thead><tbody>";
         var i = 1;
         result.forEach(function(element) {
             var d = new Date(element.date);
-            content += `<tr><td>${i}</td><td></td><td>${element.empname}</td><td></td><td>${element.empid}</td><td></td><td>${element.date}</td><td></td><td>${element.category}</td><td></td><td>${element.amount}</td><td></td><td id='bill'><button class='buttonp' onclick="viewImage('${element.bill}')">View bill</button></td></tr>`;
+            var x = element.expense_id;
+            content += `<tr><td>${element.empname}</td><td>${element.date}</td><td id='hide'>${element.category}</td><td><button class='buttonp' onclick="viewMore(${x})">View More</button></td></tr>`;
             empidarr[i-1] = element.empid;
             i++;
         });
         content += "</tbody> </table> </div>";
         document.getElementById('list').innerHTML = content;
         $('#table').DataTable();
-        console.log(empidarr);
         var li = document.getElementById("sel1");
-        var uniques = empidarr.unique()
-        console.log(uniques);
-        uniques.forEach(myFunction);
-        function myFunction(item, index) {
-              console.log(item);
-              var option1 = document.createElement("option");
-              option1.text = item;
-              option1.value = item;
-              option1.innerHTML = item;
-              li.appendChild(option1); 
-        }
-        console.log(uniques.length);         
     }
 }
 var key = {'token':tokenc,'role':role};
@@ -45,39 +33,35 @@ key = JSON.stringify(key);
 httpObj.open('GET','http://192.168.1.225:8082/EXPENSE',true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.setRequestHeader("Authorization", key);
-httpObj.send();
+httpObj.send();   
 
-function getTotal() {
-    document.getElementById('Accomodation').innerHTML = "0.00";
-    document.getElementById('Food').innerHTML = "0.00";
-    document.getElementById('Fuel').innerHTML = "0.00";
-    document.getElementById('Health').innerHTML = "0.00";
-    document.getElementById('Travel').innerHTML = "0.00";
-    document.getElementById('Others').innerHTML = "0.00";
-    document.getElementById('sum').innerHTML = "0.00";
-    var select = document.getElementById('sel1');
-    var empid = select.options[select.selectedIndex].value;
-    console.log("empid"+empid);
-    var obj =  {};
-    var httpObj = new XMLHttpRequest();
-    httpObj.onreadystatechange=function() {
-    if (this.readyState == '4' && this.status == '200') {
+function viewMore(exid){
+    var id=exid;
+    console.log(id);
+    var httpObj = new  XMLHttpRequest();
+    httpObj.onreadystatechange = function() {
+        if(this.readyState == '4' && this.status == '200') {
             var result = this.responseText;
             result = JSON.parse(result);
-            total = 0;
-            result.forEach( function(element) {
-                document.getElementById(element.category).innerHTML = element.amount;
-                amount = parseInt(element.amount);
-                total = total + element.amount;
+            console.log(result);
+            content1 = "<div class='table-responsive'><table class='table table-hover' id='tablemodal'><tbody>";
+            var i = 1;
+            result.forEach(function(element) {
+                var d = new Date(element.date);
+                content1 += `<tr><td>Employee Name</td><td>${element.empname}</td></tr><tr><td>Employee Id</td><td>${element.empid}</td></tr><tr><td>Date</td><td>${element.date}</td></tr><td>Category</td><td>${element.category}</td></tr><tr><td>Amount</td><td>${element.amount}</td></tr><tr><td id='bill'><button class='buttonp' onclick="viewImage('${element.bill}')">View bill</button></td></tr>`;
+                empidarr[i-1] = element.empid;
+                i++;
             });
-            document.getElementById('name').innerHTML = 'EMPLOYEE NAME : '+result[0].empname;
-            document.getElementById('sum').innerHTML = total;
+            content1 += "</tbody> </table> </div>";
+            document.getElementById('mbody').innerHTML = content1;
+            console.log(mbody);
+            $('#myModal').modal('show');
         }
     }
-httpObj.open('GET','http://192.168.1.225:8082/TOTAL/'+empid,true);
-httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
-httpObj.setRequestHeader("Authorization", key);
-httpObj.send();
+    httpObj.open('GET','http://192.168.1.225:8082/USEREXPENSE/'+id,true);
+    httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    httpObj.setRequestHeader("Authorization", key);
+    httpObj.send();   
 }
 
 function logout() {
@@ -119,114 +103,4 @@ function viewImage(bill) {
     }
 }
 
-function validateForm() {
-    var id = document.forms["validation"]["id"].value;
-    var name = document.forms["validation"]["name1"].value;
-    var email = document.getElementById('mailid').value;
-    var regex = /^[a-zA-Z ]{2,30}$/;
-    var matching = email.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/);
-    var reg = /^\d+$/;
-    if (id == "") {
-        bootbox.alert("Please enter employee id");
-        return false;
-    }
-    else if (id == "") {
-        bootbox.alert("Please enter user id");
-        return false;
-    }
-    else if (name == "") {
-        bootbox.alert("Please enter name of employee");
-        return false;
-    }
-    else if (email == "") {
-        bootbox.alert("Please enter email of employee");
-        return false;
-    }
-    else if (id.search(reg) == -1) {
-        bootbox.alert("invalid employee id");
-        return false;
-    }
-    else if (!regex.test(name)) {
-        bootbox.alert("invalid employee name");
-        return false;
-    }
-    else if (matching == null) {
-        bootbox.alert("invalid email format");
-        return false;
-    }
-    else{
-        addEmployee();
-    }
-}
 
-function addEmployee(){
-    var id = document.getElementById('id').value;
-    var name = document.getElementById('name1').value;
-    var email = document.getElementById('mailid').value;
-    console.log(id,name,email);
-    httpObj.onreadystatechange = function() {
-        if (this.readyState == '4' && this.status == '200') {
-            var result = this.responseText;
-            result = JSON.parse(result);
-            console.log(result);
-            if (result.message == "success") {
-                alert("Added a new employee successfully");
-                window.location.reload();
-            }
-            else if (result.message == "failed") {
-                alert("Employee is already added");
-                window.location.reload();
-            }
-        }
-    }
-httpObj.open('POST','http://192.168.1.225:8082/EMPLOYEE',true);
-httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
-httpObj.setRequestHeader("Authorization", key);
-httpObj.send('id='+id+'&name='+name+'&email='+email);
-
-}
-
-Array.prototype.contains = function(v) {
-    for(var i = 0; i < this.length; i++) {
-        if(this[i] === v) return true;
-    }
-    return false;
-};
-
-Array.prototype.unique = function() {
-    var arr = [];
-    for(var i = 0; i < this.length; i++) {
-        if(!arr.contains(this[i])) {
-            arr.push(this[i]);
-        }
-    }
-    return arr; 
-};
-
-$('#addp').click(function () {
-    $('.viewform').toggle();
-});
-
-$('#adde').click(function () {
-    $('.addform').toggle();
-});
-
-$('#totalp').click(function () {
-    $('#viewe').show();
-});
-
-var doc = new jsPDF();
-var specialElementHandlers = {
-    '#editor': function (element, renderer) {
-        return true;
-    }
-};
-
-$('#cmd').click(function () {
-    doc.fromHTML($('#viewe').html(), 15, 15, {
-        'width': 170,
-            'elementHandlers': specialElementHandlers
-    });
-    window.location.reload();
-    doc.output("dataurlnewwindow");
-})

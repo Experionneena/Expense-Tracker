@@ -1,3 +1,4 @@
+// document.body.style.backgroundImage = "url('images/expensetracker.jpg')";
 function validateForm() {
     var id = document.forms["validation"]["userid"].value;
     var password = document.forms["validation"]["password"].value;

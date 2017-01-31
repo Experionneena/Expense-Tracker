@@ -9,6 +9,7 @@ var busboy = require('connect-busboy');
 var fs = require('fs');
 path = require('path');
 var nodemailer = require('nodemailer');
+var moment = require('moment'); 
 var admin = require('./admin');
 var employee = require('./employee');
 var app = express();
@@ -27,29 +28,29 @@ app.get('/', (request, response) => {
 });
 app.use(express.static(path.join(__dirname, '..', 'client')));
 
-loginRouter.post('/login',function(request, response){
+loginRouter.post('/login',function(request, response) {
 	var id = request.body.userId;
 	var password = request.body.password;
 	console.log(id,password);
 	if ((validator.isEmpty(id) && validator.isEmpty(password))) {
 		js.message = "id and password missing in server side";
 	}
-    if ((validator.isEmpty(id))){
+    if ((validator.isEmpty(id))) {
     	js.message = "id missing in server side"; 
     }    
-    if ((validator.isEmpty(password))){
+    if ((validator.isEmpty(password))) {
     	js.message = "password missing in server side";  
     }   
 	connection.query('select empid,password,status,empname from user where empid ="'+id+'"',function(err,rows){
 		var data = JSON.stringify(rows);
 		var json = JSON.parse(data);
  		var js = {"status":'403',"message":"Login failed","user_type":null,"token":"","empname":"","empid":""};
- 		if(rows.length > 0){
-			if(id == json[0].empid && password == json[0].password){
+ 		if (rows.length > 0) {
+			if (id == json[0].empid && password == json[0].password) {
 				js.status = '200';
 				js.message = "Login success";
 				console.log(json.status);
-				if(json[0].status == true){
+				if (json[0].status == true) {
 				    js.user_type = "admin";
 				}
 				else js.user_type = "user";
@@ -68,7 +69,7 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 	var fstream;
 	var field = {};
     var js = {"status":'403',"message":" failed",};
-    new Promise(function(resolve, reject){
+    new Promise (function(resolve, reject) {
     	request.pipe(request.busboy);
 		request.busboy.on('file', function (fieldname, file, filename) {
 			console.log("Uploading: " + filename); 
@@ -89,7 +90,7 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 				field[fieldname] = val;
 		});
 		resolve();
-	}).then(function(){
+	}).then(function() {
 		if (validator.isEmpty(field["empid"])) {
 			console.log("employee id missing in server side");
 		}
@@ -102,9 +103,10 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 		else if (validator.isEmpty(field["amount"])) {
 			console.log("amount missing in server side");
 		}
-		else{
+		else {
 			var id = field["empid"];
 			console.log(id);
+			console.log("date"+field["date"]);
 			field["date"] = new Date(field["date"]);
 			connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
 	              if (!err) {
@@ -118,7 +120,7 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 	            	console.log(err);
 	        });
 		}
-	}).catch(function(){
+	}).catch(function() {
 		console.log("uploading failed");
 		js.message = "failed";
 		response.send(js);
@@ -126,7 +128,7 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 });
 
 var sendMail=function(toAddress,id) {
-    return new Promise(function(resolve,reject){
+    return new Promise(function(resolve,reject) {
 	var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -156,7 +158,7 @@ app.use('/',loginRouter);
 app.use('/',employee);
 app.use('/',admin);
 
-var server = app.listen(8082,function(){
+var server = app.listen(8082,function() {
 	var port = server.address().port;
 	console.log("Listening  on port %s", port);
 });

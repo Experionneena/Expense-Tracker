@@ -28,15 +28,35 @@ body{
 	width: 20%;
 	margin: 3% 0 3% 0;
 }
-.container{
-	float:left;
-	width: 102%;
-}
 .image{
 	width: 28%;
     height: 25%;
 	float: left;
 	margin-left: 66%;
+}
+.sidebar{
+	width:100%;
+	float:left;
+	margin-top: :5%;
+}
+.navbar-inverse {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+#empid{
+	display:none;
+}
+a{
+	color: #61BB4F!important;
+	font-size: 20px;
+	font-weight: bold;
+}
+a:hover {
+	color: #ffffff!important;
+	background-color: transparent!important;
+	background-color: #61BB4F!important;
+	font-size: 20px;
+	font-weight: bold;
 }
 .logout{
 	margin-left: 70%;
@@ -46,7 +66,7 @@ body{
 	width: 30%;
 	float: left;
 	width:30%;
-	margin-left: 2%;
+	margin-left: 13%;
 }
 .addtable{
 	margin-left: 2%;
@@ -55,13 +75,14 @@ body{
 	width:75%;
 }
 #sel1{
-	width: 90%;
+	width: 61%;
+	margin-left: 18%;
 }
 .table {
-    width: 96%;
+    width: 85%;
     margin-bottom: 67px;
-    background-color: #EBEBEB;
-     margin-left: 1%;
+ 	background-color: #ffffff;
+     margin-left: 5%;
 }
 .add{
 	margin: 2% 2%;
@@ -74,52 +95,89 @@ body{
 	color:white;
 	border-style: none;
 	margin-top: 3%;
-   margin-bottom: 3%;
+    margin-bottom: 3%;
+    padding: 2%;
+    margin-left: 2%;
 }
 .tr{
 	background-color: #4CAF50;
 }
 .confirm{
 	float: left;
-	width: 20%;
-	margin-left: 75%;
+	width: 64%;
+	margin-left: 15%;
 	background-color: #ffffff;
 	margin-bottom: 1%;
+	margin-top: 2%;
 	
-}
-.confirm{
-	display: none;
 }
 #current,#new,#confirm{
 	width:100%;
 }
 .view{
-	font-size: 25px;
-	color:#61BB4F;
+	font-size: 20px;
+  	color: #61BB4F;
 	font-weight: bold;
+	width: 85%;
+	background-color: #ffffff;
+	margin-top: 19%;
+	margin-left: 5%;
 }
+
 .list1{
 	margin-top: 2%;
 }
 th,td{
 	padding: 10px;
 }
+#tdcp{
+  	width: 55%;
+	color: #61BB4F;
+	font-size: 19px;
+}
+.labelc{
+	width: 80%;
+}
 #welcome{
 	width: 25%;
 	float: right;
-	/*margin-left: 45%;*/
 	margin-top: -4%;
 	margin-bottom: 1%;
 	color:white;
 	font-weight: bold;
 	font-size: 16px;
 }
+label{
+	width: 100%;
+}
+input{
+	color: #61BB4F;
+}
+#show{
+	display: none;
+}
+.form{
+	margin-left: 5px!important;
+}
+.table thead{
+	color:#ffffff;
+}
+#mbody{
+	padding: 3%;
+	width: 100%;
+}
+#tablemodal td{
+	padding: 4%!important;
+}
 @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3){
 body{
 	width: 100%;
 }
-table,td,tr,th{
-	width:80%;
+table,td,th,tr{
+	width: 80%;
+}
+#show{
+	display: block;
 }
 #welcome{
 	width: 50%;
@@ -130,6 +188,10 @@ table,td,tr,th{
 .logoutb{
 	width:90%;
 	margin-bottom: 2%;
+}
+#sel1 {
+  width: 68%;
+  margin-left: 5%;
 }
 .image{
 	width: 50%;
@@ -150,11 +212,27 @@ table,td,tr,th{
 	width: 98%;
 	font-size: 40px;
 }
+.view{
+	  width: 90%;
+	  margin-top: 40%;
+}
 .confirm{
 	  width: 38%;
   	margin-left: 50%;
 }
 .addtable{
 		overflow-y:scroll;
+}
+#tdcp {
+  width: 100%;
+  float: left;
+  margin-left: 6%;
+}
+.confirm {
+  width: 97%;
+  margin-left: 2%;
+}
+#hide{
+  display: none;
 }
 }

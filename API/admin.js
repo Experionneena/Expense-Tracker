@@ -21,9 +21,38 @@ adminRouter.get('/EXPENSE',function(request, response) {
 			console.log(decoded);
 			if (decoded.role == id2.role) {
 				console.log("valid user");
-				connection.query("select empname,category,amount,bill,CONCAT(EXTRACT(DAY FROM date),'/',EXTRACT(MONTH FROM date),'/',EXTRACT(YEAR FROM date)) date,user.empid from expense,user where expense.empid=user.empid order by date desc",function(err,rows){
+				connection.query("select empname,category,amount,bill,CONCAT(EXTRACT(DAY FROM date),'/',EXTRACT(MONTH FROM date),'/',EXTRACT(YEAR FROM date)) date,user.empid,expense_id from expense,user where expense.empid=user.empid order by date desc",function(err,rows){
 					var data=JSON.stringify(rows);
 					var json=JSON.parse(data);
+					response.send(json);
+			    });	
+			}
+			else {
+				console.log("invalid user");
+			}
+		}
+});
+
+adminRouter.get('/USEREXPENSE/:id',function(request, response) {
+	    console.log("haii");
+		var exid=request.params.id;
+		console.log("exid"+exid);
+		var id2={};
+		var id2=request.headers.authorization;
+		id2=JSON.parse(id2);
+		console.log(id2.token,id2.role);
+		if (id2.token == "") {
+			console.log("invalid user");
+		}
+		else {
+			var decoded = jwt.verify(id2.token, 'neena');
+			console.log(decoded);
+			if (decoded.role == id2.role) {
+				console.log("valid user");
+				connection.query("select empname,category,amount,bill,CONCAT(EXTRACT(DAY FROM date),'/',EXTRACT(MONTH FROM date),'/',EXTRACT(YEAR FROM date)) date,user.empid,expense_id from expense,user where expense.empid=user.empid and expense_id=?",[exid],function(err,rows){
+					var data=JSON.stringify(rows);
+					var json=JSON.parse(data);
+					console.log(json);
 					response.send(json);
 			    });	
 			}
@@ -136,7 +165,7 @@ var sendMail=function(toAddress,passwordo) {
             pass: 'expensetracker' 
         }
     });
-    var text = 'you are added to expense tracker system successfully.Use your employee id as userid and your password is  '+passwordo;
+    var text = 'you are added to expense tracker system successfully.Use your Employee Id as user id and your password is  '+passwordo;
 	var mailOptions = {
         from: 'expensetracker11@gmail.com',
         to: toAddress,
