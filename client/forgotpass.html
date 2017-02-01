@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script type="text/javascript" src="script/bootbox.min.js"></script>
+	</head>
+
+	<body >
+		<div class="header">
+			<div class="icon"><img class="image" src="images/expense.png"></div>
+			<div class="text">Expense Tracker</div>
+			
+			
+			
+		</div>
+	
+	 	<div class="container">
+			<div class="confirm">
+				<table>
+				    <tr>
+				    <td id="tdcp"><label class="control-label col-sm-2 labelc" for="mailid" >Email Id</label></td>
+				    <td id="tdcp"><input type="text" id="mail" name="current" placeholder="current password"></td>
+				    
+				    </tr>
+				    <tr>
+				    <td id="tdcp"><label class="control-label col-sm-2 labelc" for="employeeeid" >New password</label></td>
+				    <td id="tdcp"><input type="password" id="password" name="new" placeholder="new password"></td>
+
+				    </tr>
+				    <tr>
+				    <td id="tdcp"><label class="control-label col-sm-2 labelc" for="employeeeid" >Confirm password</label></td>
+				    <td id="tdcp"><input type="password" id="confirm" name="confirm" placeholder="confirm password"></td>
+				    </tr>
+				    <tr><td><button type="button" class="buttonp" id="submit"onclick="forgotPassword()">Submit</button></td></tr>
+				</table>
+			</div>
+		</div>
+		<script type="text/javascript" src="script/forgotpass.js"></script>
+	    <script type="text/javascript" src="script/2.5.3-crypto-md5.js"></script>
+		<link rel="stylesheet" href="style/employee.css">
+	</body>
+</html>

@@ -1,5 +1,8 @@
 body{
 	background-color: #DADADA;
+	/*background-image: url(../images/moving-expenses-tax-deduct-orig.jpg);
+    background-size: 100% 150%;
+    background-repeat: no-repeat;*/
 	overflow-x:auto;
 	overflow-y:auto;
 	width:100%;
@@ -51,12 +54,15 @@ a{
 	font-size: 20px;
 	font-weight: bold;
 }
-a:hover {
+a:hover{
 	color: #ffffff!important;
 	background-color: transparent!important;
 	background-color: #61BB4F!important;
 	font-size: 20px;
 	font-weight: bold;
+}
+#red{
+	color:red;
 }
 .logout{
 	margin-left: 70%;
@@ -83,6 +89,7 @@ a:hover {
     margin-bottom: 67px;
  	background-color: #ffffff;
      margin-left: 5%;
+     opacity: 0.85;
 }
 .add{
 	margin: 2% 2%;
@@ -91,7 +98,7 @@ a:hover {
 	font-weight: bold;
 }
 .buttonp{
-	background-color: #61BB4F;
+	background-color: #2B8519;
 	color:white;
 	border-style: none;
 	margin-top: 3%;
@@ -99,8 +106,17 @@ a:hover {
     padding: 2%;
     margin-left: 2%;
 }
+.buttond{
+background-color: #ED5E68;
+color: white;
+border-style: none;
+margin-top: 0%;
+margin-bottom: 3%;
+padding: 4%;
+margin-left: 0%;
+}
 .tr{
-	background-color: #4CAF50;
+	background-color:#61BB4F;
 }
 .confirm{
 	float: left;
@@ -109,6 +125,7 @@ a:hover {
 	background-color: #ffffff;
 	margin-bottom: 1%;
 	margin-top: 2%;
+	opacity:.85;
 	
 }
 #current,#new,#confirm{
@@ -116,12 +133,14 @@ a:hover {
 }
 .view{
 	font-size: 20px;
-  	color: #61BB4F;
+  /*	color: #61BB4F;*/
 	font-weight: bold;
-	width: 85%;
+	width: 65%;
 	background-color: #ffffff;
-	margin-top: 19%;
-	margin-left: 5%;
+	margin-top: 7%;
+	margin-left: 15%;
+	clear: both;
+	opacity: .85;
 }
 
 .list1{
@@ -132,7 +151,7 @@ th,td{
 }
 #tdcp{
   	width: 55%;
-	color: #61BB4F;
+/*	color: #61BB4F;*/
 	font-size: 19px;
 }
 .labelc{
@@ -150,9 +169,9 @@ th,td{
 label{
 	width: 100%;
 }
-input{
+/*input{
 	color: #61BB4F;
-}
+}*/
 #show{
 	display: none;
 }
@@ -175,6 +194,9 @@ body{
 }
 table,td,th,tr{
 	width: 80%;
+}
+#etable td,th,tr{
+	width: 36%;
 }
 #show{
 	display: block;

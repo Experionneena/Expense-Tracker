@@ -37,7 +37,7 @@
 				<div id="view" class="viewform">
 			    	<table class="table addtable">
 				    	<tr>
-				    		<td>Employee id</td>
+				    		<td>Employee</td>
 				    		<td></td>
 				    		<td></td>
 				    		<td></td>
@@ -47,10 +47,13 @@
 				    		<td><select class="form-control" id="sel1" name="employeeid"></select></td>
 				    		<td><button type="button" id="totalp" onclick="getTotal()" class="buttonp">View Total Expense</button></td> 
 				    	</tr>
+				    	<tr>
+				    	</tr>
 				    	<tr id="viewe">
+				    		
 				    		<td id="hide" style="font-size:30px;"><u>Expense Tracker</u></td>
 				    		<td id="hide1" style="font-size:24px;">Individual Expenses</td>
-					    	<td id="tdname"><span id="name"></span></td>
+				    		<td id="hide2" style="font-size:20px;"></td>
 					    	<td id="tdc1">Accomodation :<span id="Accomodation">0.00</span></td>
 					    	<td id="tdc">Food :<span id="Food">0.00</span></td>
 					    	<td id="tdc">Fuel :<span id="Fuel">0.00</span></td>
@@ -60,14 +63,19 @@
 					    	<td id="tdc">Grand Total :<span id="sum">0.00</span></td>
 					    	<td></td>
 					    	<td></td>
+
 					    </tr>
 				  		<tr></tr>
 				  	</table>
-				  	<button id="cmd" class="buttonp">generate PDF</button>
+				  
+				  	<button id="cmd" class="buttonp bp">Generate PDF</button>
+				  	<button id="pmd" class="buttonp bp" onclick="printDiv()">Print</button>
+				  
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="script/adminview.js"></script>
+		<script type="text/javascript" src="script/common.js"></script>
 		<script type="text/javascript" src="script/2.5.3-crypto-md5.js"></script>
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>

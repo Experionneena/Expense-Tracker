@@ -9,9 +9,12 @@ var busboy = require('connect-busboy');
 var fs = require('fs');
 path = require('path');
 var nodemailer = require('nodemailer');
+var md5 = require('md5');
 var moment = require('moment'); 
 var admin = require('./admin');
 var employee = require('./employee');
+var mail = require('./mail');
+var forgot = require('./forgotpass');
 var app = express();
 app.use(express.static('images'));
 app.use(cors());
@@ -107,13 +110,15 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 			var id = field["empid"];
 			console.log(id);
 			console.log("date"+field["date"]);
-			field["date"] = new Date(field["date"]);
+			field["date"] = field["date"].split("-").reverse().join("-"); 
+			console.log("date"+field["date"]);
 			connection.query('INSERT INTO expense SET ?' , field ,function (err,result) {
 	              if (!err) {
 					js.status = '200';
 	                js.message = "success";
 	                console.log(js);
-	                sendMail('expensetracker11@gmail.com',id);
+	                var text='A new expense is added yo the system by the user having employee id '+id;
+	                mail.sendMail('expensetracker11@gmail.com',text);
 	                response.send(js);
 	            }
 	            else
@@ -127,36 +132,10 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 	});
 });
 
-var sendMail=function(toAddress,id) {
-    return new Promise(function(resolve,reject) {
-	var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'expensetracker11@gmail.com ',
-            pass: 'expensetracker' 
-        }
-    });
-    var text = 'A new expense is added yo the system by the user having employee id '+id;
-	var mailOptions = {
-        from: 'expensetracker11@gmail.com',
-        to: toAddress,
-        subject: 'New Expense',
-        text: text
-    };
-	transporter.sendMail(mailOptions, function(error, info){
-        if(!error){
-            console.log(info);
-            resolve();
-        }else{
-            reject();
-        }
-    });
-	});
-}
-
 app.use('/',loginRouter);
 app.use('/',employee);
 app.use('/',admin);
+app.use('/',forgot);
 
 var server = app.listen(8082,function() {
 	var port = server.address().port;

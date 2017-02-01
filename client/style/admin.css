@@ -108,7 +108,7 @@ th{
 	width:30%;
 }
 #sel1{
-	width: 90%;
+	width: 100%;
 }
 #total{
 	width:96%;
@@ -128,9 +128,12 @@ th{
 	color:white;
 	border-style: none;
 	margin-left: 10%;
-   padding: 2%;
+    padding: 2%;
     margin-top: 1%;
     margin-bottom: 2%;
+}
+.bp{
+	padding: 1%!important;
 }
 #id,#name1,#mailid{
 	margin-bottom: 3%;
@@ -213,7 +216,7 @@ a:hover {
 thead{
 	color:#ffffff;
 }
-#hide,#hide1{
+#hide,#hide1,#hide2{
 	display: none;
 
 }
@@ -287,11 +290,8 @@ body{
   padding-left: 0px;
   float: left;
 }
-#tdname{
-   width: 100%;
-  float: left;
-}
-#hide{
+
+#hide,#hide2{
 	display: none;
 }
 }

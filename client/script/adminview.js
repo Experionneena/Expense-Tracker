@@ -14,11 +14,12 @@ httpObj.onreadystatechange = function() {
     if(this.readyState == '4' && this.status == '200') {
         var result = this.responseText;
         result = JSON.parse(result);
+        console.log(result);
         var empidarr = [];
         var table = document.getElementById('tablebody');
         var i = 1;
         result.forEach(function(element) {
-            empidarr[i-1] = element.empid;
+            empidarr[i-1] = element.empname+' ( Employee Id: '+element.empid+' )';
             i++;
         });
         console.log(empidarr);
@@ -53,7 +54,10 @@ function getTotal() {
     document.getElementById('Others').innerHTML = "0.00";
     document.getElementById('sum').innerHTML = "0.00";
     var select = document.getElementById('sel1');
-    var empid = select.options[select.selectedIndex].value;
+    var emid = select.options[select.selectedIndex].value;
+    document.getElementById('hide2').innerHTML = emid;
+    var array = emid.split(" ");
+    empid = array[4];
     console.log("empid"+empid);
     var obj =  {};
     var httpObj = new XMLHttpRequest();
@@ -66,8 +70,9 @@ function getTotal() {
                 document.getElementById(element.category).innerHTML = element.amount;
                 amount = parseInt(element.amount);
                 total = total + element.amount;
+                console.log(element.amount);
             });
-            document.getElementById('name').innerHTML = 'Employee Name : '+result[0].empname;
+            // document.getElementById('name').innerHTML = 'Employee Name : '+result[0].empname;
             document.getElementById('sum').innerHTML = total;
         }
     }
@@ -75,30 +80,6 @@ httpObj.open('GET','http://192.168.1.225:8082/TOTAL/'+empid,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.setRequestHeader("Authorization", key);
 httpObj.send();
-}
-
-function logout() {
-   bootbox.confirm({ 
-       size: "small",
-       message: "Do you want to logout ?", 
-       callback: function(result) {
-            if (result == true) {
-                localStorage.setItem('token1',null);
-                localStorage.setItem('role',null);
-                localStorage.clear();
-                window.location.reload();
-                window.location = 'index.html';
-            }
-            else {
-                bootbox.alert({ 
-                    size: "small",
-                    title: "Alert",
-                    message: "you pressed cancel!!", 
-                    callback: function(){}
-                })
-            }
-        }
-    });
 }
 
 Array.prototype.contains = function(v) {
@@ -135,5 +116,14 @@ $('#cmd').click(function () {
             'elementHandlers': specialElementHandlers
     });
     window.location.reload();
-    doc.output("dataurlnewwindow");
+    doc.save("sample.pdf");
 })
+function printDiv() {
+      doc.fromHTML($('#viewe').html(), 15, 15, {
+        'width': 170,
+            'elementHandlers': specialElementHandlers
+    });
+    window.location.reload();
+    doc.output("dataurlnewwindow");
+
+}

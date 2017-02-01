@@ -56,6 +56,7 @@ function viewMore(exid){
             document.getElementById('mbody').innerHTML = content1;
             console.log(mbody);
             $('#myModal').modal('show');
+                // window.location.reload();
         }
     }
     httpObj.open('GET','http://192.168.1.225:8082/USEREXPENSE/'+id,true);
@@ -64,43 +65,30 @@ function viewMore(exid){
     httpObj.send();   
 }
 
-function logout() {
-   bootbox.confirm({ 
-       size: "small",
-       message: "Do you want to logout ?", 
-       callback: function(result) {
-            if (result == true) {
-                localStorage.setItem('token1',null);
-                localStorage.setItem('role',null);
-                localStorage.clear();
-                window.location.reload();
-                window.location = 'index.html';
-            }
-            else {
-                bootbox.alert({ 
-                    size: "small",
-                    title: "Alert",
-                    message: "you pressed cancel!!", 
-                    callback: function(){}
-                })
-            }
-        }
-    });
-}
-
-function viewImage(bill) {
-    console.log("haiii");
-    if (bill == "") {
-        bootbox.alert({ 
-            size: "small",
-            title: "Alert",
-            message: "No bills are available for this expense...", 
-            callback: function() {}
-        })
-    }
-    else {
-        window.location = bill;
-    }
-}
+// function viewImage(bill) {
+//     console.log("haiii");
+//     if (bill == "") {
+//         bootbox.alert({ 
+//             size: "small",
+//             title: "Alert",
+//             message: "No bills are available for this expense...", 
+//             callback: function() {}
+//         })
+//     }
+//     else {
+//          // document.getElementById('mbody1').innerHTML = bill;
+//          //    console.log(mbody);
+// //          //    $('#myModal1').modal('show');
+// //        // window.open(bill,'Image','width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
+// //     }
+// // }
+// function swipe() {
+//    var largeImage = document.getElementById('largeImage');
+//    largeImage.style.display = 'block';
+//    largeImage.style.width=200+"px";
+//    largeImage.style.height=200+"px";
+//    var url=largeImage.getAttribute('src');
+//    window.open(url,'Image','width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
+// }
 
 

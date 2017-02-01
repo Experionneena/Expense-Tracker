@@ -63,3 +63,87 @@ function validateUser(){
 	httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 	httpObj.send('userId='+document.getElementById('userid').value+'&password='+password);
 }
+
+$(function() {
+    if (localStorage.chkbx && localStorage.chkbx != '') {
+        $('#remember_me').attr('checked', 'checked');
+        $('#userid').val(localStorage.usrname);
+        $('#password').val(localStorage.pass);
+    } else {
+        $('#remember_me').removeAttr('checked');
+        $('#userid').val('');
+        $('#password').val('');
+    }
+	$('#remember_me').click(function() {
+ 		if ($('#remember_me').is(':checked')) {
+            localStorage.usrname = $('#userid').val();
+            localStorage.pass = $('#password').val();
+            localStorage.chkbx = $('#remember_me').val();
+        } else {
+            localStorage.usrname = '';
+            localStorage.pass = '';
+            localStorage.chkbx = '';
+        }
+    });
+});
+
+// $(".password").keyup(function (event) {
+//     if (event.keyCode == 13) {
+//         textboxes = $("input.password");
+//         currentBoxNumber = textboxes.index(this);
+//         if (textboxes[currentBoxNumber + 1] != null) {
+//             nextBox = textboxes[currentBoxNumber + 1];
+//             nextBox.focus();
+//             nextBox.select();
+//         }
+//         event.preventDefault();
+//         return false;
+//     }
+// });
+
+$('#forgot').click(function(){
+     bootbox.confirm({
+       size: "medium",
+       message: "Do you want to recieve your new password by mail ?",
+       callback: function(result) {
+            if (result == true) {
+		    bootbox.prompt({
+              size: "small",
+              title: "Enter your user ID please...",
+              callback: function(result){
+                  if(result==null){
+                 
+             		
+                  }
+                  var uid=result;
+
+
+                    var httpObj1=new XMLHttpRequest();
+                      httpObj1.onreadystatechange=function(){
+                          if(this.readyState=='4' && this.status=='200'){
+                             console.log("success client");
+                             var result=this.responseText;
+                             result=JSON.parse(result);
+                             // if(result.message == "error"){
+                             //     bootbox.alert("Invalid User Id");
+                             // }
+                     }
+                  }
+                  httpObj1.open('POST','http://192.168.1.225:8082/PASSWORD',true);
+                  httpObj1.setRequestHeader('content-type','application/x-www-form-urlencoded');
+                  console.log("But why123456789");
+                  httpObj1.send('userid='+uid);
+             
+
+
+
+
+              }
+          })
+            }
+        }
+    })
+ })
+      
+           
+      

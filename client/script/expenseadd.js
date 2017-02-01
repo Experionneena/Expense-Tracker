@@ -16,10 +16,13 @@ document.getElementById('welcome').appendChild(t);
 
 function formValidation() {
     var date = document.getElementById('date').value;
+    // date = date.split("-").reverse().join("-");
+    console.log(date);
     var amount = document.getElementById('amount').value;
     var category = document.getElementById('sel1').value;
     var regamt = /^[1-9]\d*(\.\d+)?$/;
-    var regdate =  /^[01]?[0-9]\/[0-3]?[0-9]\/[12][90][0-9][0-9]$/;
+    var regamount=/^(?:\d*\.\d{1,2}|\d+)$/;
+    var regdate =  /^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/;
     var fup = document.getElementById('image');
     var fileName = fup.value;
     var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
@@ -39,7 +42,7 @@ function formValidation() {
         bootbox.alert("Please enter a date in mm/dd/yyyy format");
         return false;
     }
-    else if (amount.search(regamt) == -1) {
+    else if (amount.search(regamt) == -1 || amount.length>10 || amount.search(regamount) == -1) {
         bootbox.alert("Please enter valid amount");
         return false;
     }
@@ -54,6 +57,8 @@ function formValidation() {
         }
     } 
     else{
+       
+        // console.log(date);
         return true;
     }
   
@@ -63,7 +68,7 @@ $("form#empdata").submit(function(){
     var formData = new FormData(this);
     console.log(formData);
     if( formValidation()){
-        window.location.reload();
+       window.location.reload();
         $.ajax({
             url: 'http://192.168.1.225:8082/EXPENSE/'+key,
             type: 'POST',
@@ -75,39 +80,18 @@ $("form#empdata").submit(function(){
             contentType: false,
             processData: false
         });
+        window.alert("New expense is added");
     }
     return false; 
 });
 
-function logout() {
-   bootbox.confirm({ 
-       size: "small",
-       message: "Do you want to logout ?", 
-       callback: function(result) { 
-            if (result == true) {
-                localStorage.setItem('token1',null);
-                localStorage.setItem('role',null);
-                localStorage.clear();
-                window.location.reload();
-                window.location = 'index.html';
-            }
-            else {
-                bootbox.alert({ 
-                    size: "small",
-                    title: "Alert",
-                    message: "you pressed cancel!!", 
-                    callback: function() {}
-                })
-            }
-        }
-    });
-}
+
 
 $(document).ready(function() {
       var date_input = $('input[name="date"]'); ;
       var container = $('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
       var options = {
-        format: 'mm/dd/yyyy',
+        format: 'dd-mm-yyyy',
         container: container,
         todayHighlight: true,
         autoclose: true,

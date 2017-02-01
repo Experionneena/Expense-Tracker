@@ -10,20 +10,21 @@ body{
     padding: 2%;
     margin-right: 34%;
     background-color: #F8F8F8;
-    margin-top: 13%;
-    opacity: 0.65;
+    margin-top: 10%;
+    opacity: 0.8;
 }
+
 img {
     width: 13%;
     height: 5%;
     margin-top: 0%;
     margin-left: 0%;
 }
-button{
+.lbutton{
     margin-left: 0px;
-    padding: 2%;
+    padding: 1%;
     width: 100%;
-    font-size: 15px;
+    font-size: 20px;
     background-color: #61BB4F;
     border-style: none;
     opacity: 0.95;
@@ -32,6 +33,12 @@ button{
 input{
 	padding: 5px;
     width: 85%;
+    color:white;
+    font-weight: bold;
+}
+input:focus {
+    background-color: #9AD2BF ;
+    opacity:0.99;
 }
 .logintext{
     margin-left: 450px;
@@ -54,6 +61,20 @@ p{
    font-size: 20px;
    font-weight: bold;
 }
+#fp,#forgot{
+    color: #118000;
+   font-size: 14px;
+   font-weight: bold;
+}
+::-moz-placeholder { 
+    font-weight: bold;
+    font-size: 16px;
+}
+::-webkit-input-placeholder { 
+    font-weight: bold;
+    font-size: 16px;
+}
+
 @media only screen and (max-device-width: 414px) {
 .formdiv {
   width: 95%;

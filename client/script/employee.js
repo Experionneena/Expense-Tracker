@@ -19,16 +19,19 @@ httpObj.onreadystatechange = function() {
            bootbox.alert("You have no previous expenses")
         }
         var table = document.getElementById('list1');
-        content = "<div class='table table-responsive'><table class='table2 table-responsive' id='etable'><thead><tr class='tr'><th>Category</th><th>Date</th><th>View more</th><th id='hide'></th><th id='hide'></th></tr></thead><tbody>";
+        content = "<div class='table table-responsive'><table class='table2 table-responsive' id='etable'><thead><tr class='tr'><th>Category</th><th>Date</th><th>Amount</th><th>View more</th><th id='hide'></th><th id='hide'></th></tr></thead><tbody>";
         var i = 1;
         result.forEach(function(element) {
            var x = element.expense_id;
            console.log(element.bill);
-           content += `<tr><td>${element.category}</td><td>${element.date}</td><td><button type='button' class='buttonp' onclick='viewMore(${x})'>View more</button><td id='hide'><button type='button' class='buttonp' onclick='deleteExpense(${x})'>Delete</button></td></tr>`;
+           content += `<tr><td>${element.category}</td><td>${element.date}</td><td>${element.amount}</td><td><button type='button' class='buttonp' onclick='viewMore(${x})'>View more</button><td id='hide'><button type='button' class='buttond' onclick='deleteExpense(${x})'>Delete</button></td></tr>`;
            i++;
         });
         content += "</tbody><tfooter></tfooter></table> </div>";
         document.getElementById('list1').innerHTML = content;
+ 
+    $('#eable').DataTable();
+
         var name = localStorage.getItem('name');
         var welcome="Welcome"+"  "+name;
         console.log(welcome);
@@ -112,29 +115,3 @@ function viewImage(bill) {
         window.location = bill;
     }
 }
-
-function logout() {
-   bootbox.confirm({ 
-       size: "small",
-       message: "Do you want to logout ?", 
-       callback: function(result) { 
-            if (result == true) {
-                localStorage.setItem('token1',null);
-                localStorage.setItem('role',null);
-                localStorage.clear();
-                window.location.reload();
-                window.location = 'index.html';
-            }
-            else {
-                bootbox.alert({ 
-                    size: "small",
-                    title: "Alert",
-                    message: "you pressed cancel!!", 
-                    callback: function() {}
-                })
-            }
-        }
-    });
-}
-
-

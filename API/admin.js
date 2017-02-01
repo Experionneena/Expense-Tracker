@@ -5,6 +5,7 @@ var validator = require('validator');
 var md5 = require('md5');
 var nodemailer = require('nodemailer');
 
+var mail = require('./mail');
 var adminRouter = express.Router();
 var connection=mysql.createConnection({host:"localhost",user:"root",password:"neena",database:"expense_tracker"});
 
@@ -93,7 +94,7 @@ adminRouter.post('/EMPLOYEE',function(request, response) {
 		var id2=request.headers.authorization;
 		var id=request.body.id;
 		var name=request.body.name;
-		var passwordo=generatePassword();
+		var passwordo=mail.generatePassword();
 		var password=md5(passwordo);
 		var email=request.body.email;
 		var status=false;
@@ -130,7 +131,8 @@ adminRouter.post('/EMPLOYEE',function(request, response) {
 						var data=JSON.stringify(rows);
 						var json=JSON.parse(data);
 						js.message = "success";
-						sendMail(email,passwordo);
+						var text = 'you are added to expense tracker system successfully.Use your Employee Id as user id and your password is  '+passwordo;
+						mail.sendMail(email,text);
 					}
 					else {
 						console.log(err);
@@ -146,41 +148,6 @@ adminRouter.post('/EMPLOYEE',function(request, response) {
 		}
 });
 
-function generatePassword() {
-    var length = 8,
-    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-    retVal = "";
-   	for (var i = 0, n = charset.length; i < length; ++i) {
-        retVal += charset.charAt(Math.floor(Math.random() * n));
-    }
-    return retVal;
-}
 
-var sendMail=function(toAddress,passwordo) {
-    return new Promise(function(resolve,reject) {
-	var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'expensetracker11@gmail.com ',
-            pass: 'expensetracker' 
-        }
-    });
-    var text = 'you are added to expense tracker system successfully.Use your Employee Id as user id and your password is  '+passwordo;
-	var mailOptions = {
-        from: 'expensetracker11@gmail.com',
-        to: toAddress,
-        subject: 'Expense tracker',
-        text: text
-    };
-	transporter.sendMail(mailOptions, function(error, info) {
-        if(!error){
-              console.log(info);
-            resolve();
-        }else{
-            reject();
-        }
-    });
-	});
-}
 
 module.exports = adminRouter;

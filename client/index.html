@@ -3,10 +3,11 @@
 	<head>
 		<title>Login Page</title>
         <meta name = "viewport" content = "width=device-width, initial-scale=1">
-        <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  		<script type = "text/javascript" src="script/bootbox.min.js"></script>
+  		
+  		
 		<link rel = "stylesheet" type = "text/css" href = "style/style.css">
 	</head>
 	<body>
@@ -15,10 +16,10 @@
 			<div class = "text">Expense Tracker</div>
 			<img src = "images/expense.png" class="image">
 				<form name = "validation" method = "post">
-					<p>Login here....</p>
+					<p>Login here</p>
 					<div class = "input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="userid" type="text" class="form-control" name="email" placeholder="Enter your user id">
+						<input id="userid" type="text" class="form-control" name="email" placeholder="Enter your Employee Id">
 					</div>
 		    		<br>
 		    		<div class="input-group">
@@ -26,12 +27,20 @@
 		      			<input id="password" type="password" class="form-control" name="password" placeholder="Enter your password">
 		    		</div>
 		    		<br>
-					<button type="button" onclick="validateForm()">LOGIN</button>
+					<button type="button" class="lbutton" onclick="validateForm()">LOGIN</button>
+					<label class="checkbox">
+                    <input type="checkbox" value="remember-me" id="remember_me"> Remember me
+                	</label>
+                	<!-- <div>
+                		<p id="fp">Forgot password <a id="forgot"> Click here</a></p>
+                	</div> -->
 					<div id="result"></div> 
 				</form>
 			</div>
 		</center>
+		<script type = "text/javascript" src="script/bootbox.min.js"></script>
 		<script type="text/javascript" src="script/2.5.3-crypto-md5.js"></script>
 		<script type="text/javascript" src="script/script.js"></script>
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	</body>
 </html>
