@@ -10,7 +10,8 @@ function addEmployee(){
     var id = document.getElementById('id').value;
     var name = document.getElementById('name1').value;
     var email = document.getElementById('mailid').value;
-    console.log(id,name,email);
+    var password = document.getElementById('password').value;
+    console.log(id,name,email,password);
     httpObj.onreadystatechange = function() {
         if (this.readyState == '4' && this.status == '200') {
             var result = this.responseText;
@@ -29,14 +30,16 @@ function addEmployee(){
 httpObj.open('POST','http://192.168.1.225:8082/EMPLOYEE',true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.setRequestHeader("Authorization", key);
-httpObj.send('id='+id+'&name='+name+'&email='+email);
+httpObj.send('id='+id+'&name='+name+'&email='+email+'&password='+password);
 }
 
 function validateForm() {
     var id = document.forms["validation"]["id"].value;
     var name = document.forms["validation"]["name1"].value;
     var email = document.getElementById('mailid').value;
+    var password = document.getElementById('password').value;
     var regex = /^[a-zA-Z ]{2,30}$/;
+    var passreg= password.match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
     var matching = email.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/);
     var reg = /^\d+$/;
     if (id == "") {
@@ -65,6 +68,10 @@ function validateForm() {
     }
     else if (matching == null) {
         bootbox.alert("invalid email format");
+        return false;
+    }
+    else if (passreg == null || password.length<10) {
+        bootbox.alert("password is not strong \n (should contain 10-15 characters including a special character,an uppercase letter and a number)");
         return false;
     }
     else{

@@ -132,10 +132,13 @@ th{
     margin-top: 1%;
     margin-bottom: 2%;
 }
+.buttona{
+	 margin-bottom: 0%!important;
+}
 .bp{
 	padding: 1%!important;
 }
-#id,#name1,#mailid{
+#id,#name1,#mailid,#password{
 	margin-bottom: 3%;
 	width:75%;
 }

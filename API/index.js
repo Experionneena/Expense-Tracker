@@ -82,7 +82,7 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 			field["bill"] = timestamp+field["bill"];
 			console.log(field["bill"]);
 			filename=timestamp+filename;
-		   fstream = fs.createWriteStream(__dirname + '/images/' + filename);
+		    fstream = fs.createWriteStream(__dirname + '/images/' + filename);
 		    file.pipe(fstream);
 		    fstream.on('close', function () {
 			});
@@ -117,7 +117,7 @@ loginRouter.post('/EXPENSE/:key',function(request, response) {
 					js.status = '200';
 	                js.message = "success";
 	                console.log(js);
-	                var text='A new expense is added yo the system by the user having employee id '+id;
+	                var text='Hai,<br><br>A new expense is added yo the system by the user having employee id '+id+'<br><br>Regards,<br>Admin';
 	                mail.sendMail('expensetracker11@gmail.com',text);
 	                response.send(js);
 	            }

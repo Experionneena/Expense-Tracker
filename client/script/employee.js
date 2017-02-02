@@ -29,8 +29,9 @@ httpObj.onreadystatechange = function() {
         });
         content += "</tbody><tfooter></tfooter></table> </div>";
         document.getElementById('list1').innerHTML = content;
- 
-    $('#eable').DataTable();
+ $(document).ready(function(){
+    $('#myTable').DataTable();
+});
 
         var name = localStorage.getItem('name');
         var welcome="Welcome"+"  "+name;

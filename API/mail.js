@@ -13,7 +13,7 @@ module.exports.sendMail=function(toAddress,text) {
         from: 'expensetracker11@gmail.com',
         to: toAddress,
         subject: 'Expense Tracker',
-        text: text
+        html: text
     };
 	transporter.sendMail(mailOptions, function(error, info){
         if(!error){

@@ -94,7 +94,7 @@ adminRouter.post('/EMPLOYEE',function(request, response) {
 		var id2=request.headers.authorization;
 		var id=request.body.id;
 		var name=request.body.name;
-		var passwordo=mail.generatePassword();
+		var passwordo=request.body.password;
 		var password=md5(passwordo);
 		var email=request.body.email;
 		var status=false;
@@ -131,7 +131,7 @@ adminRouter.post('/EMPLOYEE',function(request, response) {
 						var data=JSON.stringify(rows);
 						var json=JSON.parse(data);
 						js.message = "success";
-						var text = 'you are added to expense tracker system successfully.Use your Employee Id as user id and your password is  '+passwordo;
+						var text = 'Hai '+name+',<br><br>You Have Been Added to Expense Tracker system successfully  with password '+passwordo+'<br><br>Regards,<br>Admin';
 						mail.sendMail(email,text);
 					}
 					else {

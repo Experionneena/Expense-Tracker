@@ -72,7 +72,6 @@ function getTotal() {
                 total = total + element.amount;
                 console.log(element.amount);
             });
-            // document.getElementById('name').innerHTML = 'Employee Name : '+result[0].empname;
             document.getElementById('sum').innerHTML = total;
         }
     }
