@@ -13,9 +13,10 @@
 	  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
 	</head>
 
-	<body style="overflow-x:auto">
+	<body style="overflow-x:auto" onload="startTime()">
 		<div class="main">
 			<div class="header">
+				<div id="time"></div>
 				<div class="icon"><img class="image" src="images/expense.png"></div>
 				<div class="text">Expense Tracker</div>
 				<div id="welcome">Welcome Admin</div>

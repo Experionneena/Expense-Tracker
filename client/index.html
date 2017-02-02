@@ -15,7 +15,7 @@
 			<div class = "formdiv">
 			<div class = "text">Expense Tracker</div>
 			<img src = "images/expense.png" class="image">
-				<form name = "validation" method = "post">
+				<form name = "validation" id = "validation" method = "post">
 					<p>Login here</p>
 					<div class = "input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -24,10 +24,10 @@
 		    		<br>
 		    		<div class="input-group">
 		      			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-		      			<input id="password" type="password" class="form-control" name="password" placeholder="Enter your password">
+		      			<input id="password" type="password" class="form-control" name="password" placeholder="Enter your password" onkeydown = "if (event.keyCode == 13) document.getElementById('lbutton').click()" >
 		    		</div>
 		    		<br>
-					<button type="button" class="lbutton" onclick="validateForm()">LOGIN</button>
+					<button type="button" id="lbutton" class="lbutton" onclick="validateForm()">LOGIN</button>
 					<label class="checkbox">
                     <input type="checkbox" value="remember-me" id="remember_me"> Remember me
                 	</label>

@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	  <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css"> 
-	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- -->
- <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+  	  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+	  <script type="text/javascript" src="script/bootbox.min.js"></script>
+	  <script type="text/javascript" src="script/employee.js"></script>
+	  <script type="text/javascript" src="script/common.js"></script>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css"> 
 	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> 
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	  <script type="text/javascript" src="script/bootbox.min.js"></script>
-	  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
-	  <script type="text/javascript" src="script/bootbox.min.js"></script>
+	  <link rel="stylesheet" href="style/employee.css">
 	</head>
-	<body >
+	<body onload="startTime()">
 		<div class="header">
+		    <div id="time"></div>
 			<div class="icon"><img class="image" src="images/expense.png"></div>
 			<div class="text">Expense Tracker</div>
 			<div id="welcome"></div>
@@ -48,6 +43,28 @@
 					</div>
 			<div id="list">
 		  		<div id="list1">
+			  		<div class="table table-responsive">
+				  		<table id="etable">
+					  		<thead>
+						  		<tr class="tr">
+							  		<th>Category</th>
+							  		<th>Date</th>
+							  		<th id="hidea">Amount</th>
+							  		<th>View more</th>
+							  		<th id="hide"></th>
+						
+						  		</tr>
+					  		</thead>
+				  		<tfoot>
+					  		<tr>
+					  		<th>Category</th>
+					  		<th>Date</th>
+					  		<th id="hidea">Amount</th>
+					  		</tr>
+					  		</tfoot>
+				  		<tbody id="tbody"></tbody>
+				  		</table>
+			  		</div>
 		  		</div>
 			</div>
 		  	<div id="list2">  	
@@ -69,25 +86,24 @@
 			  </div>
   			</div>
 		</div>
-		// <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		//  <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-  //    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script> -->
-  	
-		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
-		
-		
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-  		
-		<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css"> 
-	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> 
-  		
-		<script type="text/javascript" src="script/employee.js"></script>
-		<script type="text/javascript" src="script/common.js"></script>
-	    
-		<link rel="stylesheet" href="style/employee.css">
+
+		<div id="myModal1" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+			      <div class="modal-header" id="mheader">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Bill of Expense</h4>
+			      </div>
+			      <div class="modal-body" id="mbody1">
+			        
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+		    </div>
+		  </div>
+		</div>
+		 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+  	 	 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
 	</body>
 </html>

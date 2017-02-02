@@ -24,18 +24,26 @@ body{
 label{
 	color:#61BB4F;
 }
+#time {
+    margin-top: 2%;
+    margin-left: 88%;
+    float: right;
+    margin-right: 2%;
+}
 .text{
 	color: white;
 	font-size: 45px;
 	font-weight: bold;
 	float: right;
-	width:75%;
-	margin-top: 3%;
+	width: 75%;
+	margin-top: 0%;
+
 }
+
 .icon{
 	float: left;
 	width: 20%;
-	margin: 3% 0 3% 0;
+	margin: 0% 0 2% 0;
 }
 .image{
 	width: 30%;
@@ -101,8 +109,11 @@ th,td{
 	margin-bottom: 2%;
 	font-weight: bold;
 }
-th{
+#th{
 	background-color:#61BB4F;
+}
+#hidefoot{
+	display: none!important;
 }
 #imagetd{
 	width:30%;
@@ -237,6 +248,9 @@ body{
 .logoutb{
 	width:90%;
 	margin-bottom: 2%;
+}
+#time {
+  display: none;
 }
 .image{
 	width: 50%;

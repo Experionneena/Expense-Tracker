@@ -7,7 +7,8 @@ if (tokenc == null || role == null || role == "admin") {
 }     
 var key = {'token':tokenc,'role':role};
 key = JSON.stringify(key);
-document.getElementById('employeeid').value = id;
+
+// document.getElementById('employeeid').value = id;
 var httpObj = new XMLHttpRequest();
 httpObj.onreadystatechange = function() {
     if(this.readyState == '4' && this.status == '200')
@@ -19,26 +20,77 @@ httpObj.onreadystatechange = function() {
            bootbox.alert("You have no previous expenses")
         }
         var table = document.getElementById('list1');
-        content = "<div class='table table-responsive'><table class='table2 table-responsive' id='etable'><thead><tr class='tr'><th>Category</th><th>Date</th><th>Amount</th><th>View more</th><th id='hide'></th><th id='hide'></th></tr></thead><tbody>";
+        content = "<tr>";
+
         var i = 1;
         result.forEach(function(element) {
            var x = element.expense_id;
            console.log(element.bill);
-           content += `<tr><td>${element.category}</td><td>${element.date}</td><td>${element.amount}</td><td><button type='button' class='buttonp' onclick='viewMore(${x})'>View more</button><td id='hide'><button type='button' class='buttond' onclick='deleteExpense(${x})'>Delete</button></td></tr>`;
+           content += `<td>${element.category}</td><td>${element.date}</td><td id='hidea'>${element.amount}</td><td><button type='button' class='buttonp' onclick='viewMore(${x})'>View more</button><td id='hide'><button type='button' class='buttond' onclick='deleteExpense(${x})'>Delete</button></td></tr>`;
            i++;
         });
-        content += "</tbody><tfooter></tfooter></table> </div>";
-        document.getElementById('list1').innerHTML = content;
- $(document).ready(function(){
-    $('#myTable').DataTable();
-});
+        // content += "<tfooter></tfooter>";
+        
+//         $( document ).ready(function() {
+//         $('#etable').DataTable();
+
+// });
+          
+        document.getElementById('tbody').innerHTML = content;
 
         var name = localStorage.getItem('name');
         var welcome="Welcome"+"  "+name;
         console.log(welcome);
         var t = document.createTextNode(welcome);
         document.getElementById('welcome').appendChild(t);
+           $('#etable').DataTable( {
+            initComplete: function () {
+                this.api().columns().every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+     
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+     
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            }
+        } );
+
+          // $('#etable').DataTable( {
+          //       //     initComplete: function () {
+          //       //         this.api().columns().every( function () {
+          //       //             var column = this;
+          //       //             var select = $('<select><option value=""></option></select>')
+          //       //                 .appendTo( $(column.footer()).empty() )
+          //       //                 .on( 'change', function () {
+          //       //                     var val = $.fn.dataTable.util.escapeRegex(
+          //       //                         $(this).val()
+          //       //                     );
+             
+          //       //                     column
+          //       //                         .search( val ? '^'+val+'$' : '', true, false )
+          //       //                         .draw();
+          //       //                 } );
+             
+          //       //             column.data().unique().sort().each( function ( d, j ) {
+          //       //                 select.append( '<option value="'+d+'">'+d+'</option>' )
+          //       //             } );
+          //       //         } );
+          //       //     }
+          //       // } );
+
     }
+
 }
 httpObj.open('GET','http://192.168.1.225:8082/EXPENSE/'+id,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
@@ -101,18 +153,4 @@ httpObj.open('DELETE','http://192.168.1.225:8082/EXPENSE/'+expid,true);
 httpObj.setRequestHeader('content-type','application/x-www-form-urlencoded');
 httpObj.setRequestHeader("Authorization", key);
 httpObj.send();
-}
-
-function viewImage(bill) {
-    if(bill == ""){
-        bootbox.alert({ 
-            size: "small",
-            title: "Alert",
-            message: "No bills are uploaded for this expense...", 
-            callback: function(){ }
-            })
-    }
-    else{
-        window.location = bill;
-    }
 }

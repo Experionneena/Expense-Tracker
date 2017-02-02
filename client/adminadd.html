@@ -13,9 +13,10 @@
 	  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
 	</head>
 
-	<body style="overflow-x:auto">
+	<body style="overflow-x:auto" onload="startTime()">
 		<div class="main">
 			<div class="header">
+				<div id="time"></div>
 				<div class="icon"><img class="image" src="images/expense.png"></div>
 				<div class="text">Expense Tracker</div>
 				<div id="welcome">Welcome Admin</div>
@@ -67,6 +68,7 @@
 			</div> 
 		</div>
 		<script type="text/javascript" src="script/adminadd.js"></script>
+			<script type="text/javascript" src="script/common.js"></script>
 		<script type="text/javascript" src="script/2.5.3-crypto-md5.js"></script>
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>

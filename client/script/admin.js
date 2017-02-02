@@ -1,8 +1,11 @@
 var tokenc = localStorage.getItem('token1');
 var role = localStorage.getItem('role');
+
 if (tokenc == null || role == null || role == "user"){
     window.location = "index.html";
-}     
+}
+
+
 var empidarr = [];   
 var total = 0; 
 total=parseInt(total);
@@ -13,18 +16,41 @@ httpObj.onreadystatechange = function() {
         result = JSON.parse(result);
         var empidarr = [];
         var table = document.getElementById('tablebody');
-        content = "<div class='table-responsive'><table class='table table-hover' id='table'><thead><tr><th>Employee Name</th><th>Date</th><th id='hide'>Category</th><th>View Details</th></thead><tbody>";
+        content = "<div class='table-responsive'><table class='table table-hover' id='table'><thead><tr><th id='th'>Employee Name</th><th id='th'>Date</th><th id='th'>Category</th><th id='th'>View Details</th></thead><tfoot><tr><th>Employee Name</th><th>Date</th><th>Category</th><th id='hidefoot'></th></tr></tfoot><tbody>";
         var i = 1;
         result.forEach(function(element) {
             var d = new Date(element.date);
             var x = element.expense_id;
-            content += `<tr><td>${element.empname}</td><td>${element.date}</td><td id='hide'>${element.category}</td><td><button class='buttonp' onclick="viewMore(${x})">View More</button></td></tr>`;
+            content += `<tr><td>${element.empname}</td><td>${element.date}</td><td id>${element.category}</td><td><button class='buttonp' onclick="viewMore(${x})">View More</button></td></tr>`;
             empidarr[i-1] = element.empid;
             i++;
         });
         content += "</tbody> </table> </div>";
         document.getElementById('list').innerHTML = content;
-        $('#table').DataTable();
+        // $('#table').DataTable();
+         $('#table').DataTable( {
+            initComplete: function () {
+                this.api().columns().every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+     
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+     
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            }
+        } );
+
         var li = document.getElementById("sel1");
     }
 }
@@ -44,7 +70,7 @@ function viewMore(exid){
             var result = this.responseText;
             result = JSON.parse(result);
             console.log(result);
-            content1 = "<div class='table-responsive'><table class='table table-hover' id='tablemodal'><tbody>";
+            content1 = "<div class='table-responsive'><table class='display table table-hover' id='tablemodal'><tbody>";
             var i = 1;
             result.forEach(function(element) {
                 var d = new Date(element.date);
@@ -64,31 +90,5 @@ function viewMore(exid){
     httpObj.setRequestHeader("Authorization", key);
     httpObj.send();   
 }
-
-// function viewImage(bill) {
-//     console.log("haiii");
-//     if (bill == "") {
-//         bootbox.alert({ 
-//             size: "small",
-//             title: "Alert",
-//             message: "No bills are available for this expense...", 
-//             callback: function() {}
-//         })
-//     }
-//     else {
-//          // document.getElementById('mbody1').innerHTML = bill;
-//          //    console.log(mbody);
-// //          //    $('#myModal1').modal('show');
-// //        // window.open(bill,'Image','width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
-// //     }
-// // }
-// function swipe() {
-//    var largeImage = document.getElementById('largeImage');
-//    largeImage.style.display = 'block';
-//    largeImage.style.width=200+"px";
-//    largeImage.style.height=200+"px";
-//    var url=largeImage.getAttribute('src');
-//    window.open(url,'Image','width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
-// }
 
 

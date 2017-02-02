@@ -10,6 +10,12 @@ body{
 .container {
     width: 100%;
 }
+#time {
+    margin-top: 2%;
+    margin-left: 88%;
+    float: right;
+    margin-right: 2%;
+}
 #etable{
 	width: 100%;
 }
@@ -23,19 +29,29 @@ body{
 	font-size: 45px;
 	font-weight: bold;
 	float: right;
-	width:75%;
-	margin-top: 3%;
+	width: 75%;
+	margin-top: 0%;
 }
 .icon{
 	float: left;
 	width: 20%;
-	margin: 3% 0 3% 0;
+	margin: 0% 0 2% 0;
 }
 .image{
 	width: 28%;
     height: 25%;
 	float: left;
 	margin-left: 66%;
+}
+.dataTables_filter{
+	width:70%!important;
+	float: left!important;
+	text-align: left!important;
+	margin-left: 5%!important;
+}
+.dataTables_length{
+	width:20%!important;
+	float: left!important;
 }
 .sidebar{
 	width:100%;
@@ -65,8 +81,8 @@ a:hover{
 	color:red;
 }
 .logout{
-	margin-left: 70%;
 	width: 40%;
+float: right;
 }
 .logoutb{
 	width: 30%;
@@ -87,9 +103,11 @@ a:hover{
 .table {
     width: 85%;
     margin-bottom: 67px;
- 	background-color: #ffffff;
-     margin-left: 5%;
-     opacity: 0.85;
+ 	margin-left: 5%;
+    opacity: 0.85;
+}
+#tbody{
+	background-color: #ffffff;
 }
 .add{
 	margin: 2% 2%;
@@ -158,7 +176,7 @@ th,td{
 	width: 80%;
 }
 #welcome{
-	width: 25%;
+	width: 34%;
 	float: right;
 	margin-top: -4%;
 	margin-bottom: 1%;
@@ -202,13 +220,17 @@ table,td,th,tr{
 	display: block;
 }
 #welcome{
-	width: 50%;
-	float:right;
-	margin-top: 2%;
-	margin-left: 0%;
+	width: 46%;
+  float: right;
+  margin-top: 2%;
+  margin-left: 4%;
 }
+.view{
+	margin-left: 0px;
+}
+
 .logoutb{
-	width:90%;
+	  width: 60%;
 	margin-bottom: 2%;
 }
 #sel1 {
@@ -226,9 +248,9 @@ table,td,th,tr{
 	margin: 0;
 }
 .logout{
-	 margin-left: 50%;
-	margin-top: 20%;
-	margin-bottom: 1%;
+	  margin-left: 11%;
+  margin-top: 0%;
+  margin-bottom: 1%;
 }
 .text{
 	width: 98%;
@@ -250,11 +272,15 @@ table,td,th,tr{
   float: left;
   margin-left: 6%;
 }
+.table{
+	  width: 100%;
+	    margin-left: 0%;
+}
 .confirm {
   width: 97%;
   margin-left: 2%;
 }
-#hide{
+#hide,#hidea{
   display: none;
 }
 }

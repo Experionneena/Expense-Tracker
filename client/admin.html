@@ -6,6 +6,7 @@
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css"> 
 	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> 
+	  
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	  <script type="text/javascript" src="script/bootbox.min.js"></script>
@@ -13,12 +14,15 @@
 	   <link rel="stylesheet" href="style/admin.css">
 	</head>
 
-	<body style="overflow-x:auto">
+	<body style="overflow-x:auto" onload="startTime()">
 		<div class="main">
 			<div class="header">
+				<div id="time"></div>
 				<div class="icon"><img class="image" src="images/expense.png"></div>
 				<div class="text">Expense Tracker</div>
+
 				<div id="welcome">Welcome Admin</div>
+
 				<div class="logout"><button type="button" class="logoutb" onclick="logout()">LOGOUT</button></div>
 			</div>
 			<div class="sidebar">
