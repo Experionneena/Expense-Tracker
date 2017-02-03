@@ -16,7 +16,7 @@ httpObj.onreadystatechange = function() {
         result = JSON.parse(result);
         var empidarr = [];
         var table = document.getElementById('tablebody');
-        content = "<div class='table-responsive'><table class='table table-hover' id='table'><thead><tr><th id='th'>Employee Name</th><th id='th'>Date</th><th id='th'>Category</th><th id='th'>View Details</th></thead><tfoot><tr><th>Employee Name</th><th>Date</th><th>Category</th><th id='hidefoot'></th></tr></tfoot><tbody>";
+        content = "<div class='table-responsive'><table class='table table-hover' id='table'><thead><tr><th id='th'>Employee Name</th><th id='th'>Date</th><th id='th'>Category</th><th id='th'>View Details</th></thead><tfoot id='hidefoot'><tr><th>Employee Name</th><th>Date</th><th>Category</th><th id='hidefoot1'></th></tr></tfoot><tbody>";
         var i = 1;
         result.forEach(function(element) {
             var d = new Date(element.date);

@@ -1,5 +1,5 @@
 body{
-	background-color: #DADADA;
+	backround-color: #DADADA;
 	/*background-image: url(../images/moving-expenses-tax-deduct-orig.jpg);
     background-size: 100% 150%;
     background-repeat: no-repeat;*/
@@ -125,13 +125,13 @@ float: right;
     margin-left: 2%;
 }
 .buttond{
-background-color: #ED5E68;
-color: white;
-border-style: none;
-margin-top: 0%;
-margin-bottom: 3%;
-padding: 4%;
-margin-left: 0%;
+	background-color: #ED5E68;
+	color: white;
+	border-style: none;
+	margin-top: 0%;
+	margin-bottom: 3%;
+	padding: 4%;
+	margin-left: 0%;
 }
 .tr{
 	background-color:#61BB4F;
@@ -238,9 +238,10 @@ table,td,th,tr{
   margin-left: 5%;
 }
 .image{
-	width: 50%;
+/*	width: 50%;
     height: 50%;
-	float: left;
+	float: left;*/
+	display:none;
 }
 .icon{
 	float: left;
@@ -282,5 +283,12 @@ table,td,th,tr{
 }
 #hide,#hidea{
   display: none;
+}
+.buttond {
+  background-color: #ED5E68;
+  margin-top: 24%;
+  margin-bottom: 3%;
+  padding: 13%;
+  margin-left: 0%;
 }
 }

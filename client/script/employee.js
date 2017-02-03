@@ -7,8 +7,6 @@ if (tokenc == null || role == null || role == "admin") {
 }     
 var key = {'token':tokenc,'role':role};
 key = JSON.stringify(key);
-
-// document.getElementById('employeeid').value = id;
 var httpObj = new XMLHttpRequest();
 httpObj.onreadystatechange = function() {
     if(this.readyState == '4' && this.status == '200')
@@ -26,18 +24,10 @@ httpObj.onreadystatechange = function() {
         result.forEach(function(element) {
            var x = element.expense_id;
            console.log(element.bill);
-           content += `<td>${element.category}</td><td>${element.date}</td><td id='hidea'>${element.amount}</td><td><button type='button' class='buttonp' onclick='viewMore(${x})'>View more</button><td id='hide'><button type='button' class='buttond' onclick='deleteExpense(${x})'>Delete</button></td></tr>`;
+           content += `<td>${element.category}</td><td>${element.date}</td><td id='hidea'>${element.amount}</td><td><button type='button' class='buttonp' onclick='viewMore(${x})'>View more</button><td id='hide'><button type='button' class='buttond' onclick='deleteExpense(${x})'><span class='glyphicon glyphicon-trash'></span>  Delete</button></td></tr>`;
            i++;
         });
-        // content += "<tfooter></tfooter>";
-        
-//         $( document ).ready(function() {
-//         $('#etable').DataTable();
-
-// });
-          
         document.getElementById('tbody').innerHTML = content;
-
         var name = localStorage.getItem('name');
         var welcome="Welcome"+"  "+name;
         console.log(welcome);
@@ -53,42 +43,16 @@ httpObj.onreadystatechange = function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
-     
                             column
                                 .search( val ? '^'+val+'$' : '', true, false )
                                 .draw();
                         } );
-     
-                    column.data().unique().sort().each( function ( d, j ) {
+                        column.data().unique().sort().each( function ( d, j ) {
                         select.append( '<option value="'+d+'">'+d+'</option>' )
                     } );
                 } );
             }
         } );
-
-          // $('#etable').DataTable( {
-          //       //     initComplete: function () {
-          //       //         this.api().columns().every( function () {
-          //       //             var column = this;
-          //       //             var select = $('<select><option value=""></option></select>')
-          //       //                 .appendTo( $(column.footer()).empty() )
-          //       //                 .on( 'change', function () {
-          //       //                     var val = $.fn.dataTable.util.escapeRegex(
-          //       //                         $(this).val()
-          //       //                     );
-             
-          //       //                     column
-          //       //                         .search( val ? '^'+val+'$' : '', true, false )
-          //       //                         .draw();
-          //       //                 } );
-             
-          //       //             column.data().unique().sort().each( function ( d, j ) {
-          //       //                 select.append( '<option value="'+d+'">'+d+'</option>' )
-          //       //             } );
-          //       //         } );
-          //       //     }
-          //       // } );
-
     }
 
 }
@@ -112,7 +76,7 @@ function viewMore(exid){
             result.forEach(function(element) {
                 var d = new Date(element.date);
                 var x = element.expense_id;
-                content1 += `<tr><td>Employee Name</td><td>${element.empname}</td></tr><tr><td>Employee Id</td><td>${element.empid}</td></tr><tr><td>Date</td><td>${element.date}</td></tr><td>Category</td><td>${element.category}</td></tr><tr><td>Amount</td><td>${element.amount}</td></tr><tr><td id='bill'><button class='buttonp' onclick="viewImage('${element.bill}')">View bill</button></td><td id='show'><button type='button' class='buttonp' onclick='deleteExpense(${x})'>Delete</button></td></tr>`;
+                content1 += `<tr><td>Employee Name</td><td>${element.empname}</td></tr><tr><td>Employee Id</td><td>${element.empid}</td></tr><tr><td>Date</td><td>${element.date}</td></tr><td>Category</td><td>${element.category}</td></tr><tr><td>Amount</td><td>${element.amount}</td></tr><tr><td id='bill'><button class='buttonp' onclick="viewImage('${element.bill}')">View bill</button></td><td id='show'><button type='button' class='buttond' onclick='deleteExpense(${x})'> <span class='glyphicon glyphicon-trash'></span>Delete</button></td></tr>`;
                 i++;
             });
             content1 += "</tbody> </table> </div>";

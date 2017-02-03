@@ -131,14 +131,13 @@ adminRouter.post('/EMPLOYEE',function(request, response) {
 						var data=JSON.stringify(rows);
 						var json=JSON.parse(data);
 						js.message = "success";
-						var text = 'Hai '+name+',<br><br>You Have Been Added to Expense Tracker system successfully  with password '+passwordo+'<br><br>Regards,<br>Admin';
+						var text = 'Hai '+name+',<br><br>You have been added to Expense Tracker system successfully  with password '+passwordo+'<br><br>Regards,<br>Admin';
 						mail.sendMail(email,text);
 					}
 					else {
 						console.log(err);
 						js.message = "failed";
 					}
-					console.log(json);
 					response.send(js);
 			    });	
 			}
@@ -148,6 +147,57 @@ adminRouter.post('/EMPLOYEE',function(request, response) {
 		}
 });
 
+adminRouter.get('/EMPLOYEE',function(request, response) {
+	var id2=request.headers.authorization;
+	id2 = JSON.parse(id2);
+	var decoded = jwt.verify(id2.token, 'neena',function(err,decoded){
+		if(err){
+			console.log("token expired");
+		}
+		else{
+			var js={'message':""};
+			connection.query('select * from user where status=false',function(err,rows) {
+				if (!err) {
+					var data=JSON.stringify(rows);
+					var json=JSON.parse(data);
+					js.message = "success";
+				}
+				else {
+					console.log(err);
+					js.message = "failed";
+				}
+				console.log(json);
+				response.send(json);
+			});	
+		}
+	});
+});
+
+adminRouter.delete('/EMPLOYEE/:id',function(request, response) {
+	empid = request.params.id;
+	var id2=request.headers.authorization;
+	id2 = JSON.parse(id2);
+	var decoded = jwt.verify(id2.token, 'neena',function(err,decoded){
+		if(err){
+			console.log("token expired");
+		}
+		else{
+			var js={'message':""};
+			connection.query('delete from user where empid= ?',[empid],function(err,rows) {
+				if (!err) {
+					var data=JSON.stringify(rows);
+					var json=JSON.parse(data);
+					js.message = "success";
+				}
+				else {
+					console.log(err);
+					js.message = "failed";
+				}
+				response.send(js);
+			});	
+		}
+	});
+});
 
 
 module.exports = adminRouter;

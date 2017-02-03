@@ -57,8 +57,6 @@ function formValidation() {
         }
     } 
     else{
-       
-        // console.log(date);
         return true;
     }
   
@@ -81,8 +79,8 @@ $("form#empdata").submit(function(){
             processData: false
         });
         window.alert("New expense is added");
+        return false;
     }
-    return false; 
 });
 
 

@@ -96,7 +96,7 @@ $('#forgot').click(function(){
             if (result == true) {
 		    bootbox.prompt({
               size: "small",
-              title: "Enter your user ID please...",
+              title: "Enter your Employee ID please...",
               callback: function(result){
                   if(result == null){
                  

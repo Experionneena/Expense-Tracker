@@ -3,7 +3,7 @@ img{
 }
 body{
 	background-color: #DADADA;
-	margin-top: -25px;
+	/*margin-top: -25px;*/
 	overflow-x:auto
 }
 .table{
@@ -25,10 +25,10 @@ label{
 	color:#61BB4F;
 }
 #time {
-    margin-top: 2%;
+
     margin-left: 88%;
     float: right;
-    margin-right: 2%;
+    margin-right: 1%;
 }
 .text{
 	color: white;
@@ -54,10 +54,10 @@ label{
 .logout{
 	margin-left: 80%;
 }
-.logoutb{
-	width:30%;
-	margin-bottom: 2%;
-	margin-left: 2%;
+.logoutb {
+    width: 41%;
+    margin-bottom: 2%;
+    margin-left: 0%;
 }
 .add{
 	font-size: 30px;
@@ -112,9 +112,7 @@ th,td{
 #th{
 	background-color:#61BB4F;
 }
-#hidefoot{
-	display: none!important;
-}
+
 #imagetd{
 	width:30%;
 }
@@ -234,10 +232,34 @@ thead{
 	display: none;
 
 }
+.glyphicon{
+	color:white;
+
+}
+.glyphicon-log-out{
+	color: black;
+}
+.buttond{
+	background-color: #ED5E68;
+	color: white;
+	border-style: none;
+	margin-top: 0%;
+	margin-bottom: 3%;
+	padding: 4%;
+	margin-left: 0%;
+}
+#hidefoot1{
+	display: none!important;
+}
+#ticon{
+	margin:2%;
+	padding-right: 2%
+}
 
 @media only screen and (max-device-width: 414px) {
 body{
 	width: 100%;
+	margin-top:0%;
 }
 #welcome{
 	width: 36%;
@@ -246,26 +268,27 @@ body{
 	margin-left: 0;
 }
 .logoutb{
-	width:90%;
+	width:86%;
 	margin-bottom: 2%;
 }
 #time {
   display: none;
 }
 .image{
-	width: 50%;
+	/*width: 50%;
     height: 50%;
-	float: left;
+	float: left;*/
+	display:none;
 }
 .icon{
 	float: left;
 	width: 50%;
 	margin: 0;
 }
-.logout{
-	margin-left: 80%;
-	margin-top: 20%;
-	margin-bottom: 1%;
+.logout {
+  margin-left: 63%;
+  margin-top: 20%;
+  margin-bottom: 1%;
 }
 .text{
 	width: 98%;
@@ -280,7 +303,7 @@ body{
 }
 .addemp
 {
-  width: 100%;
+    width: 86%;
   margin-left: 6%;
   padding: 5%;
 }
@@ -310,5 +333,8 @@ body{
 
 #hide,#hide2{
 	display: none;
+}
+#hidefoot{
+	display: none!important;
 }
 }

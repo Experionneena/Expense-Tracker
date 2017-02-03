@@ -18,12 +18,22 @@ function addEmployee(){
             result = JSON.parse(result);
             console.log(result);
             if (result.message == "success") {
-                alert("Added a new employee successfully");
-                window.location.reload();
+                bootbox.alert({ 
+                  size: "small",
+                  title: "",
+                  message: "Added a new employee successfully", 
+                  callback: function(){
+                   window.location.reload(); }
+                })
             }
             else if (result.message == "failed") {
-                alert("Employee is already added");
-                window.location.reload();
+                bootbox.alert({ 
+                  size: "small",
+                  title: "",
+                  message: "Employee is already added", 
+                  callback: function(){
+                   window.location.reload(); }
+                })
             }
         }
     }

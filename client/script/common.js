@@ -44,7 +44,6 @@ function viewImage(bill) {
         document.getElementById('mbody1').appendChild(image);
         console.log(mbody);
         $('#myModal1').modal('show');
-       // window.open(bill,'Image','width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
     }
 }
 function startTime() {

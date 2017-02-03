@@ -16,11 +16,11 @@
 	<body style="overflow-x:auto" onload="startTime()">
 		<div class="main">
 			<div class="header">
-				<div id="time"></div>
+				<div id="ticon"><span class="glyphicon glyphicon-time"></span><div id="time"></div></div>
 				<div class="icon"><img class="image" src="images/expense.png"></div>
 				<div class="text">Expense Tracker</div>
 				<div id="welcome">Welcome Admin</div>
-				<div class="logout"><button type="button" class="logoutb" onclick="logout()">LOGOUT</button></div>
+				<div class="logout"><button type="button" class="logoutb" onclick="logout()">Logout <span class="glyphicon glyphicon-log-out"></span></button></div>
 			</div>
 			<div class="sidebar">
 			 <nav class="navbar navbar-inverse">
@@ -28,6 +28,7 @@
 				    <ul class="nav navbar-nav">
 				      <li><a href="admin.html">Expenses</a></li>
 				      <li><a href="adminadd.html">Add a new employee</a></li>
+				       <li><a href="viewuser.html">View employees</a></li>
 				      <li><a href="adminview.html">View individual expenses</a></li>
 				    </ul>
 				  </div>
@@ -69,8 +70,8 @@
 				  		<tr></tr>
 				  	</table>
 				  
-				  	<button id="cmd" class="buttonp bp">Generate PDF</button>
-				  	<button id="pmd" class="buttonp bp" onclick="printDiv()">Print</button>
+				  	<button id="cmd" class="buttonp bp"> <span class="glyphicon glyphicon-download-alt"></span></span> Generate PDF </button>
+				  	<button id="pmd" class="buttonp bp" onclick="printDiv()"><span class="glyphicon glyphicon-print"></span> Print </button>
 				  
 				</div>
 			</div>
